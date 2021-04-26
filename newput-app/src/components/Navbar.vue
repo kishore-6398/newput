@@ -2,15 +2,15 @@
   <div>
       
       <nav id="mainNav">
-        <span class="menu material-icons" @click="navToggle = !navToggle">menu</span>
-        <router-link to="/" class="titleLogo" @click="navToggle = false">NEWPUT</router-link> 
+        <span class="menu material-icons" @click="navToggleMethod">menu</span>
+        <router-link to="/" class="titleLogo" @click="navToggleFalse">NEWPUT</router-link> 
       </nav>
 
       <nav id="sidenav" class="sidenav" :class="{ sidenavActive: navToggle }">
         <div class="logo">
             <router-link to="/" >NEWPUT</router-link>
         </div>
-        <ul @click="navToggle = !navToggle">
+        <ul @click="navToggleMethod">
             <router-link to="/todo" >Todo List</router-link>
             <router-link to="/todo" >Password Vault</router-link>
             <router-link to="/todo" >URL Manager</router-link>
@@ -18,7 +18,7 @@
             <router-link to="/todo" >Expense Tracker</router-link>
             <router-link to="/todo" >Weather and Time</router-link>
         </ul>
-        <div class="overlay" @click="navToggle = !navToggle"></div>
+        <div class="overlay" @click="navToggleMethod"></div>
       </nav>
 
   </div>
@@ -26,13 +26,27 @@
 
 <script>
 import { ref } from 'vue'
+import { useStore }from 'vuex';
 
 export default {
     setup(){
         var navToggle = ref(false);
+        var store = useStore();
+
+        function navToggleMethod(){
+            navToggle.value = !navToggle.value;
+            store.commit('changePosition');
+        }
+
+        function navToggleFalse(){
+            navToggle.value = false;
+            store.commit('changePositionToFalse');
+        }
 
         return{
-            navToggle
+            navToggle,
+            navToggleMethod,
+            navToggleFalse
         }
     } 
 }
@@ -92,6 +106,7 @@ export default {
         }
         .sidenavActive{
             left: 0;
+            z-index: 10;
         }
         .sidenavActive .overlay{
             visibility: visible;
