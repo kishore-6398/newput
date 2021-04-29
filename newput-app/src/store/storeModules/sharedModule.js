@@ -1,7 +1,9 @@
 const state = () => {
     return{
         position: false,
-        fbdbUrl: "https://newput-f56e4-default-rtdb.firebaseio.com/"
+        fbdbUrl: "https://newput-f56e4-default-rtdb.firebaseio.com/newput/",
+        weatherApiUrl: "https://api.weatherapi.com/v1/current.json?key=",
+        weatherAPIKey: "9edb0764268f49a1b8264554202210"
     };
 };
 
@@ -11,6 +13,12 @@ const getters = {
     },
     getfbdburl(state){
         return state.fbdbUrl;
+    },
+    getweatherApiUrl(state){
+        return state.weatherApiUrl;
+    },
+    getweatherAPIKey(state){
+        return state.weatherAPIKey;
     }
 };
 
