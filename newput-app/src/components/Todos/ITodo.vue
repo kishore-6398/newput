@@ -1,13 +1,13 @@
 <template>
     <div class="todoList">
-        <div class="todo-bar" >
+        <div class="todo-bar"  :class="{ 'todo-complete': todo.completed }">
             <div class="todo-tick" @click="updateTickIcon">
                 <span v-if="!todo.completed" class="md-tick-grey material-icons" >check_circle_outline</span>
                 <span v-else class="md-tick-green material-icons" >check_circle</span>
             </div>
 
             <div class="todo-cap" data-bs-toggle="modal" :data-bs-target="'#updateTodoModal' + todo.id">
-                <span class="text-truncate">{{ todo.todoMsg }}</span><br/>
+                <span class="text-truncate todo-complete-text">{{ todo.todoMsg }}</span><br/>
                 <div class="date" v-if="todo.dueDate">
                     <span class="md-date material-icons">date_range</span>
                     <div class="fulldate">{{ filteredDate }}</div>
@@ -166,5 +166,10 @@ export default {
         font-size: 30px;
         -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
     }
-    
+    .todo-complete{
+        background-color: rgb(250, 236, 246);
+    }
+    .todo-complete .todo-complete-text{
+        text-decoration: line-through;
+    }
 </style>

@@ -96,13 +96,8 @@ h3{
     top: 0px;
     background-color: white;
     box-shadow: 0 5px 25px rgba(0, 0, 0 , 0.12);
-    transition: 1.5s;/*toggle position sticky in card*/
-    z-index:0;/*toggle position sticky in card*/
 }
-.searchAndDdNavActive{
-    z-index: -1;/*toggle position sticky in card*/
-    transition: 0s;/*toggle position sticky in card*/
-}
+
 .searchAndDd .search{
     padding: 15px 5px 15px 0px;
 }
@@ -120,10 +115,15 @@ h3{
     .searchAndDd{
         margin: 15px 0;
         padding: 0 20px;
-        position: sticky;
-        top: 58px;
         background-color: white;
         box-shadow: 0 5px 25px rgba(0, 0, 0 , 0.12);
+        position: unset;
+        /* transition: 1.5s;toggle position sticky in card
+        z-index:0; toggle position sticky in card */
     }
+    /* .searchAndDdNavActive{
+        z-index: -1;/*toggle position sticky in card
+        transition: 0s;/*toggle position sticky in card
+    } */
 }
 </style>

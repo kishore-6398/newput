@@ -97,11 +97,11 @@ export default {
 
 <style>
 .card-form{
-    border: 1px solid lightgray;
     border-radius: 10px;
     padding: 20px;
     margin-top: 20px;
-    
+    margin-bottom: 30px;
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.12);
 }
 .mobile-form-create, .md-mobile-form-create-icon{
     display: none;
@@ -116,10 +116,10 @@ export default {
     .md-mobile-form-create-icon{
         color:rgb(255, 255, 255);
         background-color: rgb(181, 0, 252);
-        font-size: 55px;
+        font-size: 54px;
         position: fixed;
-        bottom: 15px;
-        right: 15px;
+        bottom: 20px;
+        right: 20px;
         border-radius: 50%;
         cursor: pointer;
         box-shadow: 0 5px 40px 5px rgba(0, 0, 0, 0.12);
