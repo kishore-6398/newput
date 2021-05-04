@@ -13,9 +13,9 @@
         <ul @click="navToggleMethod">
             <router-link to="/todo" >Todo List</router-link>
             <router-link to="/pvault" >Password Vault</router-link>
-            <router-link to="/todo" >URL Manager</router-link>
+            <router-link to="/url" >URL Manager</router-link>
             <router-link to="/todo" >Notes Editor</router-link>
-            <router-link to="/todo" >Expense Tracker</router-link>
+            <router-link to="/expense/form" >Expense Tracker</router-link>
             <router-link to="/weather" >World Weather</router-link>
         </ul>
         <div class="overlay" @click="navToggleMethod"></div>

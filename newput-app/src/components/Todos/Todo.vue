@@ -1,6 +1,13 @@
 <template>
     <div id="todoContent">
-        <h3>My Todo List</h3>
+        <div class="title">
+            <img src="../../assets/todo.jpg" class="todoimage" width="45" height="45" alt="todo img" />
+            <h3>Todo List</h3>
+            <div class="date">
+                <span class="material-icons md-today">today</span>
+                <span>{{ dateToday }}</span>  
+            </div>
+        </div>
          <!--todo Form and mobile form-->   
         <app-TodoForm id="todo-form" />
         
@@ -41,6 +48,9 @@ export default {
     },
     setup(){
         const store = useStore();
+
+        var d = new Date();
+        var dateToday = d.toDateString();
         
         var selearch = reactive({
             search: '',
@@ -73,15 +83,29 @@ export default {
         return{
             todosArray,
             selearch,
-            position
+            position,
+            dateToday
         };
     }
 }
 </script>
 
 <style >
+.title{
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+.date{
+    margin-left: auto;
+    display: flex;
+}
+.todoimage{
+    border-radius: 50%;
+    margin-right: 5px;
+}
 #todoContent{
-    margin: 20px 0;
+    margin: 10px 0 20px 0;
 }
 #todo-form, #todo-list{
     margin: 0 20px;
@@ -108,6 +132,10 @@ h3{
     border-radius: 50px;
 }
 
+.md-today{
+    margin-right: 3px;
+}
+
 @media (max-width: 850px){
     #todoContent{
         margin-bottom: 65px;
@@ -125,5 +153,11 @@ h3{
         z-index: -1;/*toggle position sticky in card
         transition: 0s;/*toggle position sticky in card
     } */
+}
+
+@media (max-width: 350px){
+    h3{
+        display: none;
+    }
 }
 </style>
