@@ -87,8 +87,7 @@ export default {
         margin-top: 5px;
     }
     .savebtn{
-        width: auto;
-        margin-left: 10px;;
+        margin-left: 10px;
     }
 
     @media (max-width: 768px){

@@ -1,5 +1,5 @@
 <template>
-    <div id="vaultdata" class="col-lg-4 col-md-6 col-12">
+    <div id="vaultdata" class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-12">
 
         <div class="vault-card">
             <div class="vault-title">
@@ -13,19 +13,19 @@
                 <div class="vault-name">
                     <span class="material-icons md-person">person</span>
                     <div :id="'vault-name-text' + vault.id" class="vault-name-text text-truncate" :title="vault.vaultName">{{ vault.vaultName }}</div>
-                    <span @click="alterIconUser" v-if="boolUser" :id="'md-copy-text' + vault.id" data-clipboard-action="copy" :data-clipboard-target="'#vault-name-text' + vault.id" class="material-icons md-copy-text">content_copy</span>
+                    <span @click="alterIconUser" v-if="boolUser" data-clipboard-action="copy" :data-clipboard-target="'#vault-name-text' + vault.id" class="material-icons md-copy-text">content_copy</span>
                     <span v-else class="material-icons md-tick">done</span>
                 </div>
                 <div class="vault-password">
                     <span class="material-icons md-password">password</span>
                     <div type='password' :id="'vault-password-text' + vault.id" class="vault-password-text text-truncate" :title="vault.vaultPassword" >{{ vault.vaultPassword }}</div>
-                    <span @click="alterIconPassword" v-if="boolPassword" :id="'md-copy-text' + vault.id" data-clipboard-action="copy" :data-clipboard-target="'#vault-password-text' + vault.id" class="material-icons md-copy-text">content_copy</span>
+                    <span @click="alterIconPassword" v-if="boolPassword" data-clipboard-action="copy" :data-clipboard-target="'#vault-password-text' + vault.id" class="material-icons md-copy-text">content_copy</span>
                     <span v-else class="material-icons md-tick">done</span>
                 </div>
                 <div class="vault-url" v-if="vault.vaultUrl">
                     <span class="material-icons md-public">public</span>
                     <div :id="'vault-url-text' + vault.id" class="vault-url-text text-truncate" :title="vault.vaultUrl">{{ vault.vaultUrl }}</div>
-                    <span @click="alterIconUrl" v-if="boolUrl" :id="'md-copy-text' + vault.id" data-clipboard-action="copy" :data-clipboard-target="'#vault-url-text' + vault.id" class="material-icons md-copy-text">content_copy</span>
+                    <span @click="alterIconUrl" v-if="boolUrl" data-clipboard-action="copy" :data-clipboard-target="'#vault-url-text' + vault.id" class="material-icons md-copy-text">content_copy</span>
                     <span v-else class="material-icons md-tick">done</span>
                 </div>
             </div>
@@ -84,7 +84,7 @@ export default {
         var boolUser = ref(true);
         var boolPassword = ref(true);
         var boolUrl = ref(true);
-        var clipboard = new ClipboardJS('#md-copy-text' + props.vault.id);
+        var clipboard = new ClipboardJS('.md-copy-text');
 
         clipboard.on('success', function(e) {
             e.clearSelection();
@@ -159,7 +159,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .vault-card{
         box-shadow: 0 3px 20px rgba(0 , 0 , 0, 0.1);
         border-radius: 15px;

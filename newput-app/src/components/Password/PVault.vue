@@ -1,16 +1,18 @@
 <template>
     <div>
+
         <div class="header-desktop">
             <div class="search-container">
                 <input type="search" v-model="vaultsearch" class="form-control" id="searchPasswords" placeholder="Search passwords..."/>
             </div>
-            <div>
+            <div class="title">
                 <h4>Password Vault</h4>
             </div>
             <router-link to="/pvault/form" class="btn btn-info">Create New Login</router-link>
         </div>
+
         <div class="header-mobile">
-            <div>
+            <div class="title">
                 <img src="../../assets/pvault.png" class="icon" width="40" height="40" alt="pvault icon">
                 <h4>Password Vault</h4>
             </div>
@@ -18,7 +20,7 @@
                 <input type="search" v-model="vaultsearch" class="form-control" id="searchPasswords" placeholder="Search passwords..."/>
             </div>
             
-                <router-link to="/pvault/form"><span class="material-icons newvault-icon">add</span></router-link>
+            <router-link to="/pvault/form"><span class="material-icons newvault-icon">add</span></router-link>
         </div>
 
         <div class="individual-vault row">
@@ -61,7 +63,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .individual-vault{
         margin: 20px;
         -webkit-tap-highlight-color: transparent !important;
@@ -70,14 +72,15 @@ export default {
         box-shadow: 0 3px 25px rgba(0, 0, 0, 0.12);
         padding: 15px 35px;
         display: flex;
-        justify-content: space-between;
-        align-items: baseline;
         position: sticky;
         top:0;
         background: rgb(255, 255, 255);
     }
     .header-mobile{
         display: none;
+    }
+    .title{
+        margin: auto;
     }
     #searchPasswords{
         border-radius: 20px;
@@ -88,7 +91,7 @@ export default {
 
     @media(max-width: 850px){
         .individual-vault{
-            margin: 20px 20px 70px 20px;
+            margin: 20px 15px 70px 15px;
             -webkit-tap-highlight-color: transparent !important;
         }
         .header-desktop{
@@ -99,10 +102,14 @@ export default {
             box-shadow: 0 3px 25px rgba(0, 0, 0, 0.12);
             padding: 15px 35px;
             display: flex;  
-            justify-content: space-between;
-            align-items: baseline;
             background: rgb(255, 255, 255);
             position: static;
+        }
+        .title{
+            margin: auto 0;
+        }
+        .search-container{
+            margin-left: auto;
         }
         .icon{
             display:none;
@@ -122,10 +129,6 @@ export default {
     }
 
     @media(max-width: 450px){
-        .header-mobile{
-            justify-content: space-between;
-            align-items:stretch;
-        }
         .icon{
             display:block;
             border-radius: 15px;
