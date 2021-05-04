@@ -1,0 +1,144 @@
+<template>
+    <div id="urlManager">
+
+        <div class="titlecard">
+            <img src="../../assets/url.png" class="urlimage" width="50" height="50" alt="url img" />
+            <h4 class="titleheading">URL Manager</h4>
+            <router-link to="/url/form" class="btn btn-info newform">Add New Url</router-link>
+            <router-link to="/url/form"><span class="material-icons newvault-icon">add</span></router-link>
+        </div>
+
+        <div class="searchandcatcard">
+            <div class="searchbar">
+                <input type="search" v-model="filterObj.filterData.search" class="form-control searchinput" placeholder="Search links..."/>
+            </div>
+            <div class="select">
+                <select class="form-select" id="tag" v-model="filterObj.filterData.tagValue">
+                    <option v-for="tag in tags" :key="tag">{{ tag }}</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="row individual-url">
+            <app-IUrl v-for="temp in urlData" :key="temp.id" :urlData="temp" />
+        </div>
+    </div>
+</template>
+
+<script>
+import { onMounted, computed, reactive } from 'vue';
+import { useStore } from 'vuex';
+import IUrl from './IUrl.vue';
+
+export default {
+    components: {
+        'app-IUrl': IUrl
+    },
+    setup() {
+        const store = useStore();
+
+        var filterObj = reactive({
+            filterData: {
+                search: '',
+                tagValue: 'All Tags'
+            }
+        });
+
+        onMounted(() => {
+            store.dispatch('getUrlFromDb');
+        });
+
+        var urlData = computed(() => {
+            return store.getters.getUrlData.filter(temp => {
+                if(filterObj.filterData.tagValue === 'All Tags'){ 
+                    return temp.urlName.toLowerCase().match(filterObj.filterData.search.toLowerCase()) ||
+                    temp.urlText.toLowerCase().match(filterObj.filterData.search.toLowerCase()) ||
+                    temp.urlTag.toLowerCase().match(filterObj.filterData.search.toLowerCase());
+                }
+                else {
+                    return temp.urlTag === filterObj.filterData.tagValue 
+                    && temp.urlName.toLowerCase().match(filterObj.filterData.search.toLowerCase()) || 
+                    temp.urlTag === filterObj.filterData.tagValue 
+                    && temp.urlText.toLowerCase().match(filterObj.filterData.search.toLowerCase());
+                }
+                
+            })
+        });
+        var tags = computed(() => store.getters.gettags);
+
+        return{
+            urlData,
+            tags,
+            filterObj
+        };
+    }
+}
+</script>
+
+<style>
+    .titlecard{
+        background-color: white;
+        padding: 10px 25px;
+        display: flex;
+        align-items: center;
+    }
+   .newform{
+        margin-left: auto;
+    }
+    .searchandcatcard{
+        background-color: white;
+        box-shadow: 0 2px 25px rgba(0, 0, 0, 0.13);
+        padding: 12px 25px;
+        display: flex;
+    }
+    .searchbar, .select{
+        width: 30%;
+    }
+    .select{
+        margin-left: auto;
+    }
+    .searchinput{
+        border-radius: 20px;
+    }
+    .individual-url{
+        margin: 20px 15px 70px 15px;
+    }
+    .newvault-icon{
+        display: none;
+    }
+
+    @media (max-width: 992px){
+        .searchbar, .select{
+            width: 50%;
+        }
+        .searchbar{
+            margin-right: 5px;
+        }
+        .select{
+            margin-left: 5px;
+        }
+    }
+    @media(max-width: 850px){
+        .newform{
+            display: none;
+        }
+        .newvault-icon{
+            display: block;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgb(213, 2, 255);
+            color:white;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            font-size: 55px;
+            box-shadow: 0 5px 40px 5px rgba(0, 0, 0, 0.12);
+        }
+    }
+    @media(max-width: 380px){
+        h4{
+            display: none;
+        }
+    }
+</style>
