@@ -7,19 +7,31 @@
             <div class="hr"></div>
             <div class="mb-3">
                 <label for="vaultUname" class="form-label">User Name</label>
-                <input type="text" v-model = "vault.vaultData.vaultName" class="form-control" id="vaultUname">
+                <input type="text" v-model = "v$.vaultName.$model" class="form-control" id="vaultUname">
+                <span v-if="v$.vaultName.$error">
+                    <div id="errorText">{{ v$.vaultName.$errors[0].$message }}</div>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="vaultPassword" class="form-label">Password</label>
-                <input type="text" v-model = "vault.vaultData.vaultPassword" class="form-control" id="vaultPassword">
+                <input type="text" v-model = "v$.vaultPassword.$model" class="form-control" id="vaultPassword">
+                <span v-if="v$.vaultPassword.$error">
+                    <div id="errorText">{{ v$.vaultPassword.$errors[0].$message }}</div>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="vaultAddress" class="form-label">Website Address</label>
-                <input type="url" v-model = "vault.vaultData.vaultUrl" class="form-control" id="vaultAddress" placeholder="https://www.example.com">
+                <input type="url" v-model = "v$.vaultUrl.$model" class="form-control" id="vaultAddress" placeholder="https://www.example.com">
+                <span v-if="v$.vaultUrl.$error">
+                    <div id="errorText">{{ v$.vaultUrl.$errors[0].$message }}</div>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="vaultTag" class="form-label">Tag / Title</label>
-                <input type="text" v-model = "vault.vaultData.vaultTag" class="form-control" id="vaultTag">
+                <input type="text" v-model = "v$.vaultTag.$model" class="form-control" id="vaultTag">
+                <span v-if="v$.vaultTag.$error">
+                    <div id="errorText">{{ v$.vaultTag.$errors[0].$message }}</div>
+                </span>
             </div>
             <div class="savebtngroup">
                 <router-link to="/pvault" class="btn btn-secondary backbtn">Go Back</router-link>
@@ -30,8 +42,10 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 import { useStore } from 'vuex';
+import useVuelidate from '@vuelidate/core';
+import { required, url } from '@vuelidate/validators';
 
 export default {
     setup(){
@@ -46,13 +60,31 @@ export default {
             }
         });
 
+        var rules = computed(() => {
+            return{
+                vaultName: { required },
+                vaultPassword: { required },
+                vaultUrl: { url },
+                vaultTag: { required }
+            }
+        });
+
+        var v$ = useVuelidate(rules, vault.vaultData);
+
         function submitVault(){
-            store.dispatch('submitVaultDataToDb', vault.vaultData);
+            this.v$.$validate();    
+            if(!this.v$.$error){
+                store.dispatch('submitVaultDataToDb', vault.vaultData);
+            }
+            else{
+                console.log(this.v$.$errors);
+            }
         }
 
         return{
             vault,
-            submitVault
+            submitVault,
+            v$
         };
     }
 }
@@ -62,6 +94,9 @@ export default {
     #pVaultForm{
         height: 100vh;
         display: flex;
+    }
+    #errorText{
+        color: red;
     }
     .formCard{
         margin: auto;

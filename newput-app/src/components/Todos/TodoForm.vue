@@ -17,7 +17,7 @@
                 <div class="col-lg-4 col-md-4">
                     <label class="form-label d-md-block d-none" style="visibility: hidden">Submit</label>
                     <div>
-                        <button class="btn btn-primary w-100" @click="submitTodo" >Add Todo</button>
+                        <button class="btn btn-primary w-100" @click="submitTodo" :disabled="!todoData.todosModel.todoMsg" >Add Todo</button>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary" @click="submitTodo">Add Todo</button>
+                            <button type="button" class="btn btn-primary" @click="submitTodo" :disabled="!todoData.todosModel.todoMsg">Add Todo</button>
                         </div>
                     </div>
                 </div>
