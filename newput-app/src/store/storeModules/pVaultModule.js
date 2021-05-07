@@ -38,6 +38,9 @@ const mutations = {
 
     deleteVaultDataFromDb(){
         store.dispatch('getVaultDataFromDb');
+    },
+    resetState(state){
+        state.vaultData = [];
     }
 
 };
@@ -50,6 +53,9 @@ const actions = {
             var res = await axios.get(fbdbUrl + 'vaultData.json');
             if(res.status === 200 && res.data !== null){
                 commit('getVaultDataFromDb', res.data);
+            }
+            else if(res.data === null){
+                commit('resetState');
             }
         }
         catch(error){

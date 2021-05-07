@@ -38,6 +38,9 @@ const mutations = {
 
     deleteTodoInDb(){
         store.dispatch("getTodosFromDb");
+    },
+    resetState(state){
+        state.todosArray = [];
     }
 
 };
@@ -51,6 +54,9 @@ const actions = {
             if(res.status === 200 && res.data !== null){
                 console.log(res.status);
                 commit("getTodosFromDb", res.data);
+            }
+            else if(res.data === null){
+                commit('resetState');
             }
         }
         catch(error){

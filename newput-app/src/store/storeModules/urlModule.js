@@ -52,6 +52,11 @@ const mutations = {
 
     deleteUrlDataFromDb(){
         store.dispatch('getUrlFromDb');
+    },
+    resetState(state){
+        state.urlData = [];
+        state.tags = [];
+        state.tags.splice(0, 0, 'All Tags');
     }
 };
 
@@ -62,6 +67,9 @@ const actions = {
             var res = await axios.get(fbdbUrl + "urls.json");
             if(res.status === 200 && res.data !== null){
                 commit('getUrlFromDb', res.data);
+            }
+            else if(res.data === null){
+                commit('resetState');
             }
         }
         catch(error){
