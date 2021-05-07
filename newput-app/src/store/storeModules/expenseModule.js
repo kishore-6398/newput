@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { store } from '../store';
+import { router } from '../../routes/routes';
 
 const state = () => {
     return{
@@ -125,6 +126,7 @@ const mutations = {
 
     saveTransactionToDb(){
         store.dispatch('getTransactionsFromDb');
+        router.push("/paymenthistory");
     },
 
     getcurrentDetails(state, payLoad){

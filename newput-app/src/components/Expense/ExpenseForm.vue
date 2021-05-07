@@ -34,21 +34,30 @@
             
             <div>
                 <label for="reasonText" class="form-label">Reason</label>
-                <input type="text" v-model="transactionObj.data.reason" class="form-control" id="reasonText" placeholder="Enter reason here...">
+                <input type="text" v-model="v$.reason.$model" class="form-control" id="reasonText" placeholder="Enter reason here...">
+                <span v-if="v$.reason.$error">
+                    <div id="errorText">{{ v$.reason.$errors[0].$message }}</div>
+                </span>
             </div>
         
             <div class="selectExp">
                 <label for="selectType" class="form-label">Type</label>
-                <select v-model="transactionObj.data.type" class="form-select" name="selectType" id="selectType">
-                    <option value="Select Type" disabled>Select Type</option>
+                <select v-model="v$.type.$model" class="form-select" name="selectType" id="selectType">
+                    <option value disabled>Select Type</option>
                     <option value="Credit">Credit</option>
                     <option value="Expense">Expense</option>
                 </select>
+                <span v-if="v$.type.$error">
+                    <div id="errorText">{{ v$.type.$errors[0].$message }}</div>
+                </span>
             </div>
             
             <div>
                 <label for="expAmt" class="form-label">Amount</label>
-                <input type="number" v-model="transactionObj.data.amount" class="form-control" id="expAmt" placeholder="Enter amount here...">
+                <input type="number" v-model="v$.amount.$model" class="form-control" id="expAmt" placeholder="Enter amount here...">
+                <span v-if="v$.amount.$error">
+                    <div id="errorText">{{ v$.amount.$errors[0].$message }}</div>
+                </span>
             </div>
             
             <button class="btn btnTransac" @click="addTransaction">Add Transaction</button>
@@ -62,6 +71,8 @@
 import { onMounted, reactive, computed } from 'vue';
 import { useStore } from 'vuex';
 import swal from 'sweetalert';
+import useVuelidate from '@vuelidate/core';
+import { required, numeric } from '@vuelidate/validators';
 
 export default {
     setup() {
@@ -70,13 +81,23 @@ export default {
         var transactionObj = reactive({
             data: {
                 reason: '',
-                type: 'Select Type',
+                type: '',
                 amount: '',
                 date: '',
                 month: '',
                 year: ''
             }
         });
+
+        var rules = computed(() => {
+            return{
+                reason: { required },
+                type: { required },
+                amount: { required, numeric }
+            }
+        });
+
+        var v$ = useVuelidate(rules, transactionObj.data);
 
         onMounted(() => {
             store.dispatch('getTransactionsFromDb');
@@ -87,25 +108,27 @@ export default {
         var balance = computed(() => store.getters.getbalance);
 
         function addTransaction(){
-            if(transactionObj.data.amount <= balance.value){
-                 var d = new Date();
-                var n = d.toISOString();
-                var date = n.slice(8, 10);
-                var year = n.slice(0, 4);
-                var m = parseInt( n.slice(5, 7));
-                const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                var month = months[m - 1];
-                
-                transactionObj.data.date = date;
-                transactionObj.data.month = month;
-                transactionObj.data.year = year;
+            this.v$.$validate();
+            if(!this.v$.$error){
+                if(transactionObj.data.amount <= balance.value){
+                    var d = new Date();
+                    var n = d.toISOString();
+                    var date = n.slice(8, 10);
+                    var year = n.slice(0, 4);
+                    var m = parseInt( n.slice(5, 7));
+                    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    var month = months[m - 1];
+                    
+                    transactionObj.data.date = date;
+                    transactionObj.data.month = month;
+                    transactionObj.data.year = year;
 
-                store.dispatch('saveTransactionToDb', transactionObj.data);
-                transactionObj.data = {};
-                transactionObj.data.type = "Select Type";
-            }
-            else{
-                swal("Transaction failed!", "Insufficient balance found!", "warning");
+                    store.dispatch('saveTransactionToDb', transactionObj.data);
+                }
+                else{
+                    swal("Transaction failed!", "Insufficient balance found!", "warning");
+                }
+                
             }
         }
 
@@ -114,7 +137,8 @@ export default {
             addTransaction,
             income,
             expense,
-            balance
+            balance,
+            v$
         };
     }
 }
