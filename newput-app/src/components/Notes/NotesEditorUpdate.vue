@@ -6,7 +6,7 @@
             <div class="editbtns">
                 <router-link to="/notes" class="btn btn-secondary">Back</router-link>
                 <button @click="resetEditor" class="btn btn-danger reset">Reset</button>
-                <button data-bs-toggle="modal" data-bs-target="#notesEditModal" class="btn btn-primary update">Update Notes</button>
+                <button @click="cloneData" data-bs-toggle="modal" data-bs-target="#notesEditModal" class="btn btn-primary update">Update Notes</button>
             </div>
         </div>
     </div>
@@ -22,11 +22,17 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="notesEditTitle" class="form-label">Title</label>
-                        <input v-model="noteData.cloneSingleNote.title" type="text" class="form-control" id="notesEditTitle">
+                        <input v-model="v$.title.$model" type="text" class="form-control" id="notesEditTitle">
+                        <span v-if="v$.title.$error">
+                            <div id="errorText">{{ v$.title.$errors[0].$message }}</div>
+                        </span>
                     </div>
                     <div class="mb-3">
                         <label for="notesEditCategory" class="form-label">Category</label>
-                        <input v-model="noteData.cloneSingleNote.category" type="text" class="form-control" id="notesEditCategory">
+                        <input v-model="v$.category.$model" type="text" class="form-control" id="notesEditCategory">
+                        <span v-if="v$.category.$error">
+                            <div id="errorText">{{ v$.category.$errors[0].$message }}</div>
+                        </span>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -47,6 +53,8 @@ import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 //close bootstrap modal
 import { Modal } from 'bootstrap';
+import useVuelidate from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
 
 export default {
   setup() {
@@ -91,28 +99,47 @@ export default {
 
     watch(singleNote, () => {
         quill.setContents(singleNote.value.delta);
-        noteData.cloneSingleNote = Object.assign({}, noteData.singleNote);
     });
+
+    function cloneData(){
+        var obj = Object.assign({}, noteData.singleNote);
+        noteData.cloneSingleNote.title = obj.title;
+        noteData.cloneSingleNote.category = obj.category;
+        noteData.cloneSingleNote.delta = obj.delta;
+        noteData.cloneSingleNote.date = obj.date;
+    }
+
+    var rules = computed(() => {
+        return{
+            title: { required },
+            category: { required }
+        }
+    });
+
+    var v$ = useVuelidate(rules, noteData.cloneSingleNote);
     
     function resetEditor(){
         quill.setContents();
     }
 
     function updateNotes(){
-        var d = new Date();
-        var t = d.toDateString();
-        var updatedate = t.slice(4);
+        this.v$.$validate();    
+        if(!this.v$.$error){
+            var d = new Date();
+            var t = d.toDateString();
+            var updatedate = t.slice(4);
 
-        noteData.cloneSingleNote.date = updatedate;
-        noteData.cloneSingleNote.delta = quill.getContents();
-        noteData.cloneSingleNote.id = route.params.id;
-        //console.log(noteData.cloneSingleNote);
-        store.dispatch('updateNotesInDb', noteData.cloneSingleNote);
+            noteData.cloneSingleNote.date = updatedate;
+            noteData.cloneSingleNote.delta = quill.getContents();
+            noteData.cloneSingleNote.id = route.params.id;
+            //console.log(noteData.cloneSingleNote);
+            store.dispatch('updateNotesInDb', noteData.cloneSingleNote);
 
-        //close bootstrap modal
-        var myModalEl = document.getElementById('notesEditModal');
-        var modal = Modal.getInstance(myModalEl) // Returns a Bootstrap modal instance
-        modal.hide();
+            //close bootstrap modal
+            var myModalEl = document.getElementById('notesEditModal');
+            var modal = Modal.getInstance(myModalEl) // Returns a Bootstrap modal instance
+            modal.hide();
+        }
     }
 
     //while sidenav opens and closes, prevent overlapping
@@ -145,7 +172,9 @@ export default {
       quill,
       noteData,
       resetEditor,
-      updateNotes
+      updateNotes,
+      cloneData,
+      v$
     };
   }
 }

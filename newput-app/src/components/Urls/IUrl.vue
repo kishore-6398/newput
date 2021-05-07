@@ -3,7 +3,7 @@
         <div class="urlcard">
             <div class="urlcardtag">
                 <span class="material-icons md-bookmark">star</span>
-                <div class="tag" :title="urlData.urlTag">{{ urlData.urlTag }}</div>
+                <div class="tag text-truncate" :title="urlData.urlTag">{{ urlData.urlTag }}</div>
                 <span class="material-icons md-edit" @click="cloneData" data-bs-toggle="modal" :data-bs-target="'#editModal' + urlData.id">edit_note</span>
                 <span class="material-icons md-del" @click="deleteUrl">delete</span>
             </div>
@@ -15,7 +15,7 @@
                 </div>
                 <div class="urldata">
                     <span class="material-icons md-link">link</span>
-                    <div :id="'url' + urlData.id" class="url" :title="urlData.urlText">{{ urlData.urlText }}</div>
+                    <div :id="'url' + urlData.id" class="url text-truncate" :title="urlData.urlText">{{ urlData.urlText }}</div>
                     <span v-if="boolPassword" @click="alterIconUrl" data-clipboard-action="copy" :data-clipboard-target="'#url' + urlData.id" class="material-icons md-copy">content_copy</span>
                     <span v-else class="material-icons md-tick">done</span>
                 </div>
@@ -33,15 +33,24 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label :for="'urleditName' + urlData.id" class="form-label">Name</label>
-                            <input type="text" v-model="urlUpdateData.data.urlName" class="form-control" :id="'urleditName' + urlData.id">
+                            <input type="text" v-model="v$.urlName.$model" class="form-control" :id="'urleditName' + urlData.id">
+                            <span v-if="v$.urlName.$error">
+                                <div id="errorText">{{ v$.urlName.$errors[0].$message }}</div>
+                            </span>
                         </div>
                         <div class="mb-3">
                             <label :for="'urleditText' + urlData.id" class="form-label">URL</label>
-                            <input type="url" v-model="urlUpdateData.data.urlText" class="form-control" :id="'urleditText' + urlData.id" placeholder="https://www.example.com">
+                            <input type="url" v-model="v$.urlText.$model" class="form-control" :id="'urleditText' + urlData.id" placeholder="https://www.example.com">
+                            <span v-if="v$.urlText.$error">
+                                <div id="errorText">{{ v$.urlText.$errors[0].$message }}</div>
+                            </span>
                         </div>
                         <div class="mb-3">
                             <label :for="'urleditTag' + urlData.id" class="form-label">Tag</label>
-                            <input type="text" v-model="urlUpdateData.data.urlTag" class="form-control" :id="'urleditTag' + urlData.id">
+                            <input type="text" v-model="v$.urlTag.$model" class="form-control" :id="'urleditTag' + urlData.id">
+                            <span v-if="v$.urlTag.$error">
+                                <div id="errorText">{{ v$.urlTag.$errors[0].$message }}</div>
+                            </span>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -56,11 +65,13 @@
 
 <script>
 import ClipboardJS from '../../../node_modules/clipboard/dist/clipboard.min';
-import { ref, reactive } from 'vue';
+import { ref, reactive, computed } from 'vue';
 import { useStore } from 'vuex';
 import swal from 'sweetalert';
 //close bootstrap modal
 import { Modal } from 'bootstrap';
+import useVuelidate from '@vuelidate/core';
+import { required, url } from '@vuelidate/validators';
 
 export default {
     props: ['urlData'],
@@ -84,18 +95,35 @@ export default {
         });
 
         function cloneData(){
-            urlUpdateData.data = Object.assign({}, props.urlData);
+            var obj = Object.assign({}, props.urlData);
+            urlUpdateData.data.urlName = obj.urlName;
+            urlUpdateData.data.urlText = obj.urlText;
+            urlUpdateData.data.urlTag = obj.urlTag;
+            urlUpdateData.data.id = obj.id;
         }
+
+        var rules = computed(() => {
+            return{
+                urlName: { required },
+                urlText: { required, url },
+                urlTag: { required }
+            }
+        });
+
+        var v$ = useVuelidate(rules, urlUpdateData.data);
 
         const store = useStore();
 
         function updateUrl(){
-            store.dispatch('updateUrlDataInDb', urlUpdateData.data);
+            this.v$.$validate();    
+            if(!this.v$.$error){
+                store.dispatch('updateUrlDataInDb', urlUpdateData.data);
 
-            //close bootstrap modal
-            var myModalEl = document.getElementById('editModal' + props.urlData.id);
-            var modal = Modal.getInstance(myModalEl) // Returns a Bootstrap modal instance
-            modal.hide();
+                //close bootstrap modal
+                var myModalEl = document.getElementById('editModal' + props.urlData.id);
+                var modal = Modal.getInstance(myModalEl) // Returns a Bootstrap modal instance
+                modal.hide();
+            }
         }
 
         function deleteUrl(){
@@ -123,7 +151,8 @@ export default {
             urlUpdateData,
             updateUrl,
             deleteUrl,
-            cloneData
+            cloneData,
+            v$
         };
     }
 }
@@ -135,6 +164,9 @@ export default {
         border-radius: 15px;
         box-shadow: 0 2px 25px rgba(0, 0, 0, 0.13);
         margin: 20px 0 0 0;
+    }
+    #errorText{
+        color: red;
     }
     .hr{
         margin: 0 0;

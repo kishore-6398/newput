@@ -86,12 +86,12 @@ export default {
       margin-left: auto;
   }
   .individual-note{
-    margin: 20px 10px 70px 10px;
+    margin: 8px 10px 70px 10px;
   }
   .filterContainer{
     background-color: white;
     box-shadow: 0 2px 25px rgba(0, 0, 0, 0.13);
-    padding: 12px 25px;
+    padding: 12px 18px;
     display: flex;
   }
   .searchNotes, .selectCat{

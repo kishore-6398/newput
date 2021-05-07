@@ -7,15 +7,24 @@
             <div class="hr"></div>
             <div class="mb-3">
                 <label for="urlName" class="form-label">Name</label>
-                <input type="text" v-model="urlDataObj.urlDetails.urlName" class="form-control" id="urlName">
+                <input type="text" v-model="v$.urlName.$model" class="form-control" id="urlName">
+                <span v-if="v$.urlName.$error">
+                    <div id="errorText">{{ v$.urlName.$errors[0].$message }}</div>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="urlText" class="form-label">URL</label>
-                <input type="url" v-model="urlDataObj.urlDetails.urlText" class="form-control" id="urlText" placeholder="https://www.example.com">
+                <input type="url" v-model="v$.urlText.$model" class="form-control" id="urlText" placeholder="https://www.example.com">
+                <span v-if="v$.urlText.$error">
+                    <div id="errorText">{{ v$.urlText.$errors[0].$message }}</div>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="urlTag" class="form-label">Tag</label>
-                <input type="text" v-model="urlDataObj.urlDetails.urlTag" class="form-control" id="urlTag">
+                <input type="text" v-model="v$.urlTag.$model" class="form-control" id="urlTag">
+                <span v-if="v$.urlTag.$error">
+                    <div id="errorText">{{ v$.urlTag.$errors[0].$message }}</div>
+                </span>
             </div>
             <div class="savebtngroup">
                 <router-link to="/url" class="btn btn-secondary backbtn">Go Back</router-link>
@@ -26,8 +35,10 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 import { useStore } from 'vuex';
+import useVuelidate from '@vuelidate/core';
+import { required, url } from '@vuelidate/validators';
 
 export default {
     setup() {
@@ -40,13 +51,27 @@ export default {
             }
         });
 
+        var rules = computed(() => {
+            return{
+                urlName: { required },
+                urlText: { required, url },
+                urlTag: { required }
+            }
+        });
+
+        var v$ = useVuelidate(rules, urlDataObj.urlDetails);
+
         function submitURL(){
-            store.dispatch('saveUrlInDb', urlDataObj.urlDetails);
+            this.v$.$validate();    
+            if(!this.v$.$error){
+                store.dispatch('saveUrlInDb', urlDataObj.urlDetails);
+            }
         }
 
         return{
             urlDataObj,
-            submitURL
+            submitURL,
+            v$
         };
     }
 }
@@ -56,6 +81,9 @@ export default {
     #UrlFormView{
         height: 100vh;
         display: flex;
+    }
+    #errorText{
+        color: red;
     }
     .urlformcard{
         background-color: white;

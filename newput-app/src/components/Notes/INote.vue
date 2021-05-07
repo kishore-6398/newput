@@ -65,6 +65,9 @@ export default {
 </script>
 
 <style>
+  .col-6{
+    padding: 0 6px;
+  }
   .notesCard{
     background-color: white;
     border-radius: 15px;

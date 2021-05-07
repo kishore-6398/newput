@@ -22,11 +22,17 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="notesTitle" class="form-label">Title</label>
-                            <input v-model="saveAs.data.title" type="text" class="form-control" id="notesTitle">
+                            <input v-model="v$.title.$model" type="text" class="form-control" id="notesTitle">
+                            <span v-if="v$.title.$error">
+                                <div id="errorText">{{ v$.title.$errors[0].$message }}</div>
+                            </span>
                         </div>
                         <div class="mb-3">
                             <label for="notesCategory" class="form-label">Category</label>
-                            <input v-model="saveAs.data.category" type="text" class="form-control" id="notesCategory">
+                            <input v-model="v$.category.$model" type="text" class="form-control" id="notesCategory">
+                            <span v-if="v$.category.$error">
+                                <div id="errorText">{{ v$.category.$errors[0].$message }}</div>
+                            </span>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -46,6 +52,8 @@ import {  onMounted, watch, computed, reactive } from 'vue';
 import { useStore } from 'vuex';
 //close bootstrap modal
 import { Modal } from 'bootstrap';
+import useVuelidate from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
 
 export default {
     setup() {
@@ -58,6 +66,16 @@ export default {
                 delta: null
             }
         });
+
+        var rules = computed(() => {
+            return{
+                title: { required },
+                category: { required }
+            }
+        });
+
+        var v$ = useVuelidate(rules, saveAs.data);
+
         var quill = null;
 
         var toolbarOptions = [
@@ -85,18 +103,21 @@ export default {
             });
 
             function saveNotes(){
-                var d = new Date();
-                var t = d.toDateString();
-                var notedate = t.slice(4);
-                saveAs.data.date = notedate;
+                this.v$.$validate();    
+                if(!this.v$.$error){
+                    var d = new Date();
+                    var t = d.toDateString();
+                    var notedate = t.slice(4);
+                    saveAs.data.date = notedate;
 
-                saveAs.data.delta = quill.getContents();
-                store.dispatch('saveNotesToDb', saveAs.data);
+                    saveAs.data.delta = quill.getContents();
+                    store.dispatch('saveNotesToDb', saveAs.data);
 
-                //close bootstrap modal
-                var myModalEl = document.getElementById('notesModal');
-                var modal = Modal.getInstance(myModalEl) // Returns a Bootstrap modal instance
-                modal.hide();
+                    //close bootstrap modal
+                    var myModalEl = document.getElementById('notesModal');
+                    var modal = Modal.getInstance(myModalEl) // Returns a Bootstrap modal instance
+                    modal.hide();
+                }
             }
 
             function resetEditor(){
@@ -133,7 +154,8 @@ export default {
             quill,
             saveAs,
             resetEditor,
-            saveNotes
+            saveNotes,
+            v$
         };
     }
 }
@@ -156,6 +178,9 @@ export default {
     .editorContainer{
         width: 100%;
         height: calc(100vh - 268px);
+    }
+    #errorText{
+        color: red;
     }
     .saveBar{
         width: 100%;

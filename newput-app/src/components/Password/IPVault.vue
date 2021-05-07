@@ -42,19 +42,31 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label :for="'vaultUname' + vault.id" class="form-label">User Name</label>
-                            <input type="text" v-model="editedVaultData.evaultData.vaultName" class="form-control" :id="'vaultUname' + vault.id">
+                            <input type="text" v-model="v$.vaultName.$model" class="form-control" :id="'vaultUname' + vault.id">
+                            <span v-if="v$.vaultName.$error">
+                                <div id="errorText">{{ v$.vaultName.$errors[0].$message }}</div>
+                            </span>
                         </div>
                         <div class="mb-3">
                             <label :for="'vaultPassword' + vault.id" class="form-label">Password</label>
-                            <input type="text" v-model="editedVaultData.evaultData.vaultPassword" class="form-control" :id="'vaultPassword' + vault.id">
+                            <input type="text" v-model="v$.vaultPassword.$model" class="form-control" :id="'vaultPassword' + vault.id">
+                            <span v-if="v$.vaultPassword.$error">
+                                <div id="errorText">{{ v$.vaultPassword.$errors[0].$message }}</div>
+                            </span>
                         </div>
                         <div class="mb-3">
                             <label :for="'vaultAddress' + vault.id" class="form-label">Website Address</label>
-                            <input type="url" v-model="editedVaultData.evaultData.vaultUrl"  class="form-control" :id="'vaultAddress' + vault.id" placeholder="https://www.example.com">
+                            <input type="url" v-model="v$.vaultUrl.$model"  class="form-control" :id="'vaultAddress' + vault.id" placeholder="https://www.example.com">
+                            <span v-if="v$.vaultUrl.$error">
+                                <div id="errorText">{{ v$.vaultUrl.$errors[0].$message }}</div>
+                            </span>
                         </div>
                         <div class="mb-3">
                             <label :for="'vaultTag' + vault.id" class="form-label">Tag / Title</label>
-                            <input type="text" v-model="editedVaultData.evaultData.vaultTag" class="form-control" :id="'vaultTag' + vault.id">
+                            <input type="text" v-model="v$.vaultTag.$model" class="form-control" :id="'vaultTag' + vault.id">
+                            <span v-if="v$.vaultTag.$error">
+                                <div id="errorText">{{ v$.vaultTag.$errors[0].$message }}</div>
+                            </span>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -70,12 +82,13 @@
 
 <script>
 import ClipboardJS from '../../../node_modules/clipboard/dist/clipboard.min';
-import { reactive, ref } from 'vue';
+import { reactive, ref, computed } from 'vue';
 import { useStore } from 'vuex';
 import swal from 'sweetalert';
 //close bootstrap modal
 import { Modal } from 'bootstrap';
-
+import useVuelidate from '@vuelidate/core';
+import { required, url } from '@vuelidate/validators';
 
 export default {
     props: ['vault'],
@@ -115,17 +128,36 @@ export default {
         });
 
         function cloneData(){
-            editedVaultData.evaultData = Object.assign({}, props.vault);
+            var obj = Object.assign({}, props.vault);
+            editedVaultData.evaultData.vaultName = obj.vaultName;
+            editedVaultData.evaultData.vaultPassword = obj.vaultPassword;
+            editedVaultData.evaultData.vaultUrl = obj.vaultUrl;
+            editedVaultData.evaultData.vaultTag = obj.vaultTag;
+            editedVaultData.evaultData.id = obj.id;
         }
+
+        var rules = computed(() => {
+            return{
+                vaultName: { required },
+                vaultPassword: { required },
+                vaultUrl: { url },
+                vaultTag: { required }
+            }
+        });
+
+        var v$ = useVuelidate(rules, editedVaultData.evaultData);
 
         const store = useStore();
 
         function updateVaultDetails(){
-            store.dispatch('updateVaultDetailInDb', editedVaultData.evaultData);
-            //close bootstrap modal
-            var myModalEl = document.getElementById('vaultUpdateModal' + props.vault.id);
-            var modal = Modal.getInstance(myModalEl) // Returns a Bootstrap modal instance
-            modal.hide();
+            this.v$.$validate();    
+            if(!this.v$.$error){
+                store.dispatch('updateVaultDetailInDb', editedVaultData.evaultData);
+                //close bootstrap modal
+                var myModalEl = document.getElementById('vaultUpdateModal' + props.vault.id);
+                var modal = Modal.getInstance(myModalEl) // Returns a Bootstrap modal instance
+                modal.hide();
+            }
         }
 
         //delete vault
@@ -158,7 +190,8 @@ export default {
             editedVaultData,
             updateVaultDetails,
             deleteVaultData,
-            cloneData
+            cloneData,
+            v$
         };
     }
 }
@@ -170,6 +203,9 @@ export default {
         border-radius: 15px;
         margin: 20px 0 0 0;
         min-height: 160px;
+    }
+    #errorText{
+        color: red;
     }
     .vault-title{
         display: flex;

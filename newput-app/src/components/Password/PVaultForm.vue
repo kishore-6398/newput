@@ -76,9 +76,6 @@ export default {
             if(!this.v$.$error){
                 store.dispatch('submitVaultDataToDb', vault.vaultData);
             }
-            else{
-                console.log(this.v$.$errors);
-            }
         }
 
         return{
