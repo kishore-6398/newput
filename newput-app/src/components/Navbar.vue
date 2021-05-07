@@ -14,7 +14,7 @@
             <router-link to="/todo" >Todo List</router-link>
             <router-link to="/pvault" >Password Vault</router-link>
             <router-link to="/url" >URL Manager</router-link>
-            <router-link to="/todo" >Notes Editor</router-link>
+            <router-link to="/notes" >Notes Editor</router-link>
             <router-link to="/expense/form" >Expense Tracker</router-link>
             <router-link to="/weather" >World Weather</router-link>
         </ul>
@@ -94,7 +94,7 @@ export default {
 
     @media (max-width: 850px){
         .sidenav{
-            position: fixed;
+            position: fixed ;
             top:58px;
             left: -100%;
             background-color: gray;
@@ -106,15 +106,16 @@ export default {
         }
         .sidenavActive{
             left: 0;
-            z-index: 2;
+            z-index: 3 !important;
         }
         .sidenavActive .overlay{
             visibility: visible;
-            position: fixed;
+            position: fixed !important;
             top:58px;
             left: 260px;
             right: 0;
             bottom: 0;
+            z-index: 3 !important;
         }
         #sidenav .logo{
             display: none;

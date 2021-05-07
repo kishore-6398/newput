@@ -136,9 +136,4 @@ export default {
             box-shadow: 0 5px 40px 5px rgba(0, 0, 0, 0.12);
         }
     }
-    @media(max-width: 380px){
-        h4{
-            display: none;
-        }
-    }
 </style>

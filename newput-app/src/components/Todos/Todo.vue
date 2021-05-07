@@ -50,7 +50,12 @@ export default {
         const store = useStore();
 
         var d = new Date();
-        var dateToday = d.toDateString();
+        var fulldate = d.toDateString();
+        var day = fulldate.slice(0, 3);
+        var month = fulldate.slice(4, 7);
+        var date = fulldate.slice(8, 10);
+        var year = fulldate.slice(11, 15);
+        var dateToday = day + ', ' + month + ' ' + date + ', ' + year;
         
         var selearch = reactive({
             search: '',
