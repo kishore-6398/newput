@@ -4,7 +4,7 @@
             <div class="urlcardtag">
                 <span class="material-icons md-bookmark">star</span>
                 <div class="tag" :title="urlData.urlTag">{{ urlData.urlTag }}</div>
-                <span class="material-icons md-edit" data-bs-toggle="modal" :data-bs-target="'#editModal' + urlData.id">edit_note</span>
+                <span class="material-icons md-edit" @click="cloneData" data-bs-toggle="modal" :data-bs-target="'#editModal' + urlData.id">edit_note</span>
                 <span class="material-icons md-del" @click="deleteUrl">delete</span>
             </div>
             <div class="hr"></div>
@@ -80,8 +80,12 @@ export default {
         }
 
         var urlUpdateData = reactive({
-            data: Object.assign({}, props.urlData)
+            data: {}
         });
+
+        function cloneData(){
+            urlUpdateData.data = Object.assign({}, props.urlData);
+        }
 
         const store = useStore();
 
@@ -118,7 +122,8 @@ export default {
             alterIconUrl,
             urlUpdateData,
             updateUrl,
-            deleteUrl
+            deleteUrl,
+            cloneData
         };
     }
 }

@@ -5,7 +5,7 @@
             <div class="vault-title">
                 <span class="material-icons md-tag">tag</span>
                 <div class="titletag text-truncate" :title="vault.vaultTag">{{ vault.vaultTag }}</div>
-                <span class="material-icons md-edit" data-bs-toggle="modal" :data-bs-target="'#vaultUpdateModal' + vault.id">edit_note</span>
+                <span class="material-icons md-edit" @click="cloneData" data-bs-toggle="modal" :data-bs-target="'#vaultUpdateModal' + vault.id">edit_note</span>
                 <span class="material-icons md-del" @click="deleteVaultData">delete</span>
             </div>
             <div class="hr"></div>
@@ -111,8 +111,12 @@ export default {
 
         //update vault
         var editedVaultData = reactive({
-            evaultData: Object.assign({}, props.vault)
+            evaultData: {}
         });
+
+        function cloneData(){
+            editedVaultData.evaultData = Object.assign({}, props.vault);
+        }
 
         const store = useStore();
 
@@ -153,7 +157,8 @@ export default {
             alterIconUrl,
             editedVaultData,
             updateVaultDetails,
-            deleteVaultData
+            deleteVaultData,
+            cloneData
         };
     }
 }

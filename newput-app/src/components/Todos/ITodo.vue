@@ -6,7 +6,7 @@
                 <span v-else class="md-tick-green material-icons" >check_circle</span>
             </div>
 
-            <div class="todo-cap" data-bs-toggle="modal" :data-bs-target="'#updateTodoModal' + todo.id">
+            <div class="todo-cap" @click="cloneData" data-bs-toggle="modal" :data-bs-target="'#updateTodoModal' + todo.id">
                 <span class="text-truncate todo-complete-text">{{ todo.todoMsg }}</span><br/>
                 <div class="date" v-if="todo.dueDate">
                     <span class="md-date material-icons">date_range</span>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" @click="updateTodo">Save Changes</button>
+                        <button type="button" class="btn btn-primary" @click="updateTodo" :disabled="!tododata.todoObj.todoMsg">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -59,10 +59,14 @@ import swal from 'sweetalert';
 export default {
     props: ['todo'],
     setup(props){
-        var tododata = reactive({
-            todoObj: Object.assign({}, props.todo)
-        });
         var store = useStore();
+        var tododata = reactive({
+            todoObj: {}
+        });
+        
+        function cloneData(){
+            tododata.todoObj = Object.assign({}, props.todo);
+        }
 
         function updateTodo(){
             store.dispatch('updateTodoInDb', tododata.todoObj);
@@ -108,6 +112,7 @@ export default {
 
         return{
             tododata,
+            cloneData,
             updateTodo,
             updateTickIcon,
             deleteTodo,
