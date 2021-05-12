@@ -61,7 +61,7 @@ export default {
     setup(props){
         var store = useStore();
         var tododata = reactive({
-            todoObj: {}
+            todoObj: Object.assign({}, props.todo)
         });
         
         function cloneData(){

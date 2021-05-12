@@ -52,7 +52,6 @@ const actions = {
             var dbUrl = getters.getfbdburl;
             var res = await axios.get(dbUrl + "todos.json");
             if(res.status === 200 && res.data !== null){
-                console.log(res.status);
                 commit("getTodosFromDb", res.data);
             }
             else if(res.data === null){
@@ -69,7 +68,6 @@ const actions = {
             var dbUrl = getters.getfbdburl;
             var res = await axios.post(dbUrl + "todos.json", payLoad);
             if(res.status === 200 && res.data !== null){
-                console.log(res.status);
                 commit("submitTodoToDb");
             }
         }
@@ -88,7 +86,6 @@ const actions = {
             };
             var res = await axios.put(dbUrl + "todos/" + payLoad.id + ".json", todoObjWithoutId);
             if(res.status === 200 && res.data !== null){
-                console.log(res.status);
                 commit("updateTodoInDb");
             }
         }
@@ -103,7 +100,6 @@ const actions = {
             
             var res = await axios.delete(dbUrl + "todos/" + payLoad.id + ".json");
             if(res.status === 200){
-                console.log(res.status);
                 commit("deleteTodoInDb");
             }
         }

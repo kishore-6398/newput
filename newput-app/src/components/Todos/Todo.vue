@@ -1,6 +1,6 @@
 <template>
     <div id="todoContent">
-        <div class="title">
+        <div class="todoTitle">
             <img src="../../assets/todo.jpg" class="todoimage" width="45" height="45" alt="todo img" />
             <h3>Todo List</h3>
             <div class="date">
@@ -81,7 +81,6 @@ export default {
         //var total = computed(() => todosArray.value.length);
 
         var position = computed(() => {
-            // console.log(store.getters.getposition);
             return store.getters.getposition;
         });
 
@@ -89,14 +88,14 @@ export default {
             todosArray,
             selearch,
             position,
-            dateToday
+            dateToday,
         };
     }
 }
 </script>
 
-<style >
-.title{
+<style>
+.todoTitle{
     display: flex;
     align-items: center;
     margin: 0 20px;
@@ -117,6 +116,7 @@ export default {
 }
 h3{
     text-align: center;
+    margin-bottom: 1px;
 }
 .searchAndDd{
     margin: 15px 0;
