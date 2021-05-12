@@ -6,6 +6,7 @@ import urlModule from './storeModules/urlModule';
 import notesModule from './storeModules/notesModule';
 import expenseModule from './storeModules/expenseModule';
 import weatherModule from './storeModules/weatherModule';
+import authenticationModule from './storeModules/authenticationModule';
 
 export const store = createStore({
     modules: {
@@ -15,6 +16,7 @@ export const store = createStore({
         urlModule,
         notesModule,
         expenseModule,
-        weatherModule
+        weatherModule,
+        authenticationModule
     }
 });

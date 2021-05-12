@@ -9,5 +9,7 @@ import { store } from './store/store';
 const app = createApp(App);
 
 app.use(store);
+store.dispatch('autoLoginUser');
+
 app.use(router);
 app.mount('#app')

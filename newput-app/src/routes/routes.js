@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { store } from '../store/store';
 
 import Starter from '../components/Starter.vue';
 import Todo from '../components/Todos/Todo.vue';
@@ -12,6 +13,8 @@ import NotesEditorUpdate from '../components/Notes/NotesEditorUpdate.vue';
 import ExpenseForm from '../components/Expense/ExpenseForm.vue';
 import PaymentHistory from '../components/Expense/PaymentHistory.vue';
 import Weather from '../components/Weather/Weather.vue';
+import Login from '../components/Authentication/Login.vue';
+import Signup from '../components/Authentication/Signup.vue';
 
 const routes = [
     { path: '/', component: Starter, name: 'StarterView' },
@@ -25,10 +28,22 @@ const routes = [
     { path: '/noteseditor/edit/:id', component: NotesEditorUpdate, name: 'NotesEditorUpdateView' },
     { path: '/expense/form', component: ExpenseForm, name: 'ExpenseFormView' },
     { path: '/paymenthistory', component: PaymentHistory, name: 'PaymentHistoryView' },
-    { path: '/weather', component: Weather, name: 'WeatherView' }
+    { path: '/weather', component: Weather, name: 'WeatherView' },
+    { path: '/login', component: Login, name: 'LoginView' },
+    { path: '/signup', component: Signup, name: 'SignupView' }
 ];
 
 export const router = createRouter({
     routes,
     history: createWebHistory()
+});
+
+router.beforeEach((to, from, next) => {
+    var isAuthenticated = store.getters.getidToken;
+    if (to.name !== 'LoginView' && to.name !== 'SignupView' && isAuthenticated === '' || isAuthenticated === null){
+        next({ name: 'LoginView' })
+    } 
+    else{
+        next()
+    } 
 });
