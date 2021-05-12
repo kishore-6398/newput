@@ -144,7 +144,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
     .titleCard{
         display: flex;
         box-shadow: 0 3px 25px rgba(0, 0, 0, 0.12);

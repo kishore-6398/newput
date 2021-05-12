@@ -11,12 +11,13 @@
             <router-link to="/" >NEWPUT</router-link>
         </div>
         <ul @click="navToggleMethod">
-            <router-link to="/todo" >Todo List</router-link>
-            <router-link to="/pvault" >Password Vault</router-link>
-            <router-link to="/url" >URL Manager</router-link>
-            <router-link to="/notes" >Notes Editor</router-link>
-            <router-link to="/expense/form" >Expense Tracker</router-link>
-            <router-link to="/weather" >World Weather</router-link>
+            <router-link class="routeLink" to="/todo" >Todo List</router-link>
+            <router-link class="routeLink" to="/pvault" >Password Vault</router-link>
+            <router-link class="routeLink" to="/url" >URL Manager</router-link>
+            <router-link class="routeLink" to="/notes" >Notes Editor</router-link>
+            <router-link class="routeLink" to="/expense/form" >Expense Tracker</router-link>
+            <router-link class="routeLink" to="/weather" >World Weather</router-link>
+            <li @click="logout" class="routeLink">LogOut</li>
         </ul>
         <div class="overlay" @click="navToggleMethod"></div>
       </nav>
@@ -43,10 +44,15 @@ export default {
             store.commit('changePositionToFalse');
         }
 
+        function logout(){
+            store.dispatch('logoutUser');
+        }
+
         return{
             navToggle,
             navToggleMethod,
-            navToggleFalse
+            navToggleFalse,
+            logout
         }
     } 
 }
@@ -75,18 +81,20 @@ export default {
         list-style: none;
         padding: 0;
         margin: 20px 0 0 0;
+        display: flex;
+        flex-direction: column;
     }
     
-    #sidenav ul a{
-        display: block;
+    #sidenav ul .routeLink{
         padding: 20px 0 20px 10px;
         text-decoration: none;
         color: white;
         font-size: 17px;
         transition: 0.3s;
     }
-    #sidenav ul a:hover{
+    #sidenav ul .routeLink:hover{
         background-color: rgb(157, 83, 226);
+        cursor: pointer;
     }
     .overlay{
         visibility: hidden;

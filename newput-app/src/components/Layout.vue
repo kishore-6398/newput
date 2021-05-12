@@ -1,6 +1,6 @@
 <template>
   <div id="box">
-        <div id="navbar" v-if="bool !== 'StarterView'">
+        <div id="navbar" v-if="bool !== 'StarterView' && bool !== 'LoginView' && bool !== 'SignupView'">
             <app-Navbar />
         </div>
 
@@ -8,6 +8,10 @@
             <div id="smallNav">
                 <app-Navbar />
             </div>
+            <router-view />
+        </div>
+
+        <div v-else-if="bool === 'LoginView' || bool === 'SignupView'">
             <router-view />
         </div>
 

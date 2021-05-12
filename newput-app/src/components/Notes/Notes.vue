@@ -3,7 +3,7 @@
 
     <div class="titlenotecard">
         <img src="../../assets/notes.png" class="notesimage" width="45" height="45" alt="notes img" />
-        <h4 class="titleheading">Notes Editor</h4>
+        <h4 class="notestitleheading">Notes Editor</h4>
         <router-link to="/noteseditor" class="btn btn-info newnote">Add New Notes</router-link>
         <router-link to="/noteseditor"><span class="material-icons newnote-icon">add</span></router-link>
     </div>
@@ -75,18 +75,18 @@ export default {
 <style>
   .titlenotecard{
     background-color: white;
-    padding: 10px 25px;
+    padding: 10px 20px;
     display: flex;
     align-items: center;
   }
-  .titleheading{
+  .notestitleheading{
     margin-top: 5px;
   }
   .newnote{
       margin-left: auto;
   }
   .individual-note{
-    margin: 8px 10px 70px 10px;
+    margin: 5px 10px 70px 10px;
   }
   .filterContainer{
     background-color: white;
@@ -134,6 +134,9 @@ export default {
           height: 55px;
           font-size: 55px;
           box-shadow: 0 5px 40px 5px rgba(0, 0, 0, 0.12);
+      }
+      .notestitleheading{
+        display: block;
       }
   }
 </style>

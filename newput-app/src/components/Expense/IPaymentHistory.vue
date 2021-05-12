@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
     .paymentcard{
         display: flex;
         margin: 10px 20px;

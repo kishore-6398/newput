@@ -4,7 +4,7 @@
             <div class="formCardTitle">
                 Create New Login
             </div>
-            <div class="hr"></div>
+            <div class="hrpass"></div>
             <div class="mb-3">
                 <label for="vaultUname" class="form-label">User Name</label>
                 <input type="text" v-model = "v$.vaultName.$model" class="form-control" id="vaultUname">
@@ -87,7 +87,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
     #pVaultForm{
         height: 100vh;
         display: flex;
@@ -108,7 +108,7 @@ export default {
         font-weight: bold;
         font-style: italic;
     }
-    .hr{
+    .hrpass{
         width: 100%;
         height: 1px;
         margin: 20px 0;

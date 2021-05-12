@@ -63,14 +63,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
     .individual-vault{
-        margin: 20px;
+        margin: 10px;
         -webkit-tap-highlight-color: transparent !important;
     }
     .header-desktop{
         box-shadow: 0 3px 25px rgba(0, 0, 0, 0.12);
-        padding: 15px 35px;
+        padding: 15px 25px;
         display: flex;
         position: sticky;
         top:0;
@@ -91,7 +91,7 @@ export default {
 
     @media(max-width: 850px){
         .individual-vault{
-            margin: 20px 15px 70px 15px;
+            margin: 10px 10px 70px 10px;
             -webkit-tap-highlight-color: transparent !important;
         }
         .header-desktop{
@@ -100,7 +100,7 @@ export default {
         .header-mobile{
             display: block;
             box-shadow: 0 3px 25px rgba(0, 0, 0, 0.12);
-            padding: 15px 35px;
+            padding: 15px 25px;
             display: flex;  
             background: rgb(255, 255, 255);
             position: static;
@@ -133,7 +133,7 @@ export default {
             display:block;
             border-radius: 15px;
         }
-        h4{
+        .title h4{
             display: none;
         }
     }

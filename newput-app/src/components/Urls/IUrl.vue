@@ -3,11 +3,11 @@
         <div class="urlcard">
             <div class="urlcardtag">
                 <span class="material-icons md-bookmark">star</span>
-                <div class="tag text-truncate" :title="urlData.urlTag">{{ urlData.urlTag }}</div>
+                <div class="urltag text-truncate" :title="urlData.urlTag">{{ urlData.urlTag }}</div>
                 <span class="material-icons md-edit" @click="cloneData" data-bs-toggle="modal" :data-bs-target="'#editModal' + urlData.id">edit_note</span>
                 <span class="material-icons md-del" @click="deleteUrl">delete</span>
             </div>
-            <div class="hr"></div>
+            <div class="hrurl"></div>
             <div class="urlcardbody">
                 <div class="urlcardname">
                     <span class="material-icons md-person">person</span>
@@ -168,7 +168,7 @@ export default {
     #errorText{
         color: red;
     }
-    .hr{
+    .hrurl{
         margin: 0 0;
         width: 100%;
         height: 1px;
@@ -179,11 +179,12 @@ export default {
     }
     .urlcardtag, .urlcardname, .urldata{
         display: flex;
+        align-items: center;
     }
-    .tag, .urlname, .url{
+    .urltag, .urlname, .url{
         flex: 1;
     }
-    .tag{
+    .urltag{
         padding: 10px 0 10px 0;
         font-weight: bold;
         font-size: large;

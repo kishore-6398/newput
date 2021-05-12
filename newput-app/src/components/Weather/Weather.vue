@@ -62,7 +62,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
     .world-weather{
         background-color: #d9e4f5;
         background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
@@ -94,7 +94,7 @@ export default {
     }
     .intro{
         border: 1px solid rgb(202, 202, 202);
-        margin: 0 auto 80px auto;
+        margin: 15px auto 60px auto;
         padding: 20px;
         background-color: #b1ade2;
         background-image: linear-gradient(315deg, #b1ade2 0%, #7ddff8 74%);

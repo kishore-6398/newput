@@ -3,7 +3,7 @@
 
         <div class="titlecard">
             <img src="../../assets/url.png" class="urlimage" width="50" height="50" alt="url img" />
-            <h4 class="titleheading">URL Manager</h4>
+            <h4 class="urltitleheading">URL Manager</h4>
             <router-link to="/url/form" class="btn btn-info newform">Add New Url</router-link>
             <router-link to="/url/form"><span class="material-icons newvault-icon">add</span></router-link>
         </div>
@@ -101,7 +101,7 @@ export default {
         border-radius: 20px;
     }
     .individual-url{
-        margin: 20px 15px 70px 15px;
+        margin: 10px 10px 70px 10px;
     }
     .newvault-icon{
         display: none;
@@ -134,6 +134,9 @@ export default {
             height: 55px;
             font-size: 55px;
             box-shadow: 0 5px 40px 5px rgba(0, 0, 0, 0.12);
+        }
+        .urltitleheading{
+            display: block;
         }
     }
 </style>

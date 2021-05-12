@@ -90,6 +90,7 @@ export default {
   }
   .notesHeader, .notesFooter{
     display: flex;
+    align-items: center;
   }
   .notesTag{
     padding: 10px 0;
@@ -120,6 +121,7 @@ export default {
   .md-cat{
     padding: 10px 0 10px 10px;
     color: #9900ff;
+    font-size: 20px;
   }
   .md-trash{
     color: red;

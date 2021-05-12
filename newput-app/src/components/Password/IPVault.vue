@@ -8,7 +8,7 @@
                 <span class="material-icons md-edit" @click="cloneData" data-bs-toggle="modal" :data-bs-target="'#vaultUpdateModal' + vault.id">edit_note</span>
                 <span class="material-icons md-del" @click="deleteVaultData">delete</span>
             </div>
-            <div class="hr"></div>
+            <div class="hrLine"></div>
             <div class="vault-body">
                 <div class="vault-name">
                     <span class="material-icons md-person">person</span>
@@ -197,7 +197,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
     .vault-card{
         box-shadow: 0 3px 20px rgba(0 , 0 , 0, 0.1);
         border-radius: 15px;
@@ -209,8 +209,9 @@ export default {
     }
     .vault-title{
         display: flex;
+        align-items: center;
     }
-    .hr{
+    .hrLine{
         width: 100%;
         height: 1px;
         background-color: rgb(185, 185, 185);
@@ -228,6 +229,7 @@ export default {
     }
     .vault-name, .vault-password, .vault-url{
         display: flex;
+        align-items: center;
     }
     .vault-password, .vault-url{
         margin-top: 8px;

@@ -77,7 +77,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
     #UrlFormView{
         height: 100vh;
         display: flex;

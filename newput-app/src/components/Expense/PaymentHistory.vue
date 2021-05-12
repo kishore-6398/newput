@@ -106,7 +106,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
     #paymentView{
         width: 60%;
         margin: 0 auto;
