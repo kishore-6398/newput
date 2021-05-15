@@ -2,7 +2,7 @@
     <div id="urlManager">
 
         <div class="titlecard">
-            <img src="../../assets/url.png" class="urlimage" width="50" height="50" alt="url img" />
+            <img src="../../assets/url-logo.jpg" class="urlimage" width="45" height="45" alt="url img" />
             <h4 class="urltitleheading">URL Manager</h4>
             <router-link to="/url/form" class="btn btn-info newform">Add New Url</router-link>
             <router-link to="/url/form"><span class="material-icons newvault-icon">add</span></router-link>
@@ -105,6 +105,10 @@ export default {
     }
     .newvault-icon{
         display: none;
+    }
+    .urlimage{
+        border-radius: 10px;
+        margin-right: 10px;
     }
 
     @media (max-width: 992px){
