@@ -72,7 +72,7 @@ import { onMounted, reactive, computed } from 'vue';
 import { useStore } from 'vuex';
 import swal from 'sweetalert';
 import useVuelidate from '@vuelidate/core';
-import { required, numeric } from '@vuelidate/validators';
+import { required, numeric, minValue } from '@vuelidate/validators';
 
 export default {
     setup() {
@@ -93,7 +93,11 @@ export default {
             return{
                 reason: { required },
                 type: { required },
-                amount: { required, numeric }
+                amount: { 
+                    required,
+                    numeric,
+                    minValue: minValue(1)
+                }
             }
         });
 
@@ -110,7 +114,7 @@ export default {
         function addTransaction(){
             this.v$.$validate();
             if(!this.v$.$error){
-                if(transactionObj.data.amount <= balance.value){
+                if(transactionObj.data.amount <= balance.value || transactionObj.data.type === "Credit"){
                     var d = new Date();
                     var n = d.toISOString();
                     var date = n.slice(8, 10);
