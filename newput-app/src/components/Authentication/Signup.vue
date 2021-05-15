@@ -2,7 +2,8 @@
     <div id="signupView">
         <div class="SignupCard">
             <div class="signupHeader">
-                <h4>Newput App Sign Up</h4>
+                <img src="../../assets/newputlogosmall.png" class="newputlogo" alt="newput logo small">
+                <h4 class="signuptitle">Newput App Sign Up</h4>
             </div>
             <div>
                 <label for="signupName" class="form-label">Username</label>
@@ -109,6 +110,12 @@ export default {
     }
     .signupHeader{
         text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+    .signuptitle{
+        margin-bottom: 0;
+        line-height: unset;
     }
     .SignupCard .loginFooter{
         margin-bottom: 10px;

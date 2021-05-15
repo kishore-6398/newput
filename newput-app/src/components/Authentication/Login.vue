@@ -2,7 +2,8 @@
     <div id="loginView">
         <div class="LoginCard">
             <div class="loginHeader">
-                <h4>Newput App Login</h4>
+                <img src="../../assets/newputlogosmall.png" class="newputlogo" alt="newput logo small">
+                <h4 class="logintitle">Newput App Login</h4>
             </div>
             <div>
                 <label for="loginEmail" class="form-label">Email</label>
@@ -11,12 +12,15 @@
                     <div id="errorText">{{ v$.email.$errors[0].$message }}</div>
                 </span>
             </div>
-            <div>
+            <div class="loginPassWrapper">
                 <label for="loginPassword" class="form-label">Password</label>
                 <input v-model="v$.password.$model" type="password" class="form-control" id="loginPassword">
                 <span v-if="v$.password.$error">
                     <div id="errorText">{{ v$.password.$errors[0].$message }}</div>
                 </span>
+            </div>
+            <div class="fplinkwrapper">
+                <router-link to="/forgotpassword" class="fplink">Forgot Password?</router-link>
             </div>
             <div>
                 <button @click="loginUser" class="btn btn-primary loginBtn">Login</button>
@@ -97,12 +101,28 @@ export default {
     }
     .loginHeader{
         text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+    .logintitle{
+        margin-bottom: 0;
+        line-height:unset;
     }
     .LoginCard .loginFooter{
         margin-bottom: 10px;
     }
     .link{
         text-decoration: none;
+    }
+    .LoginCard .loginPassWrapper{
+        margin-bottom: 5px;
+    }
+    .fplinkwrapper{
+        display: flex;
+    }
+    .fplink{
+        text-decoration: none;
+        margin-left: auto;
     }
 
     @media (max-width: 850px){
