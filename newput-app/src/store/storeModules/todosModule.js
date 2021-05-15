@@ -50,7 +50,9 @@ const actions = {
     async getTodosFromDb({ commit, getters }){
         try{
             var dbUrl = getters.getfbdburl;
-            var res = await axios.get(dbUrl + "todos.json");
+            var authId = getters.getidToken;
+
+            var res = await axios.get(dbUrl + "/todos.json?auth=" + authId);
             if(res.status === 200 && res.data !== null){
                 commit("getTodosFromDb", res.data);
             }
@@ -66,7 +68,9 @@ const actions = {
     async submitTodoToDb({ commit, getters }, payLoad){
         try{
             var dbUrl = getters.getfbdburl;
-            var res = await axios.post(dbUrl + "todos.json", payLoad);
+            var authId = getters.getidToken;
+
+            var res = await axios.post(dbUrl + "/todos.json?auth=" + authId, payLoad);
             if(res.status === 200 && res.data !== null){
                 commit("submitTodoToDb");
             }
@@ -79,12 +83,13 @@ const actions = {
     async updateTodoInDb({ commit, getters }, payLoad){
         try{
             var dbUrl = getters.getfbdburl;
+            var authId = getters.getidToken;
             var todoObjWithoutId = {
                 todoMsg: payLoad.todoMsg,
                 dueDate: payLoad.dueDate,
                 completed: payLoad.completed
             };
-            var res = await axios.put(dbUrl + "todos/" + payLoad.id + ".json", todoObjWithoutId);
+            var res = await axios.put(dbUrl + "/todos/" + payLoad.id + ".json?auth=" + authId, todoObjWithoutId);
             if(res.status === 200 && res.data !== null){
                 commit("updateTodoInDb");
             }
@@ -97,8 +102,9 @@ const actions = {
     async deleteTodoInDb({ commit, getters }, payLoad){
         try{
             var dbUrl = getters.getfbdburl;
-            
-            var res = await axios.delete(dbUrl + "todos/" + payLoad.id + ".json");
+            var authId = getters.getidToken;
+
+            var res = await axios.delete(dbUrl + "/todos/" + payLoad.id + ".json?auth=" + authId);
             if(res.status === 200){
                 commit("deleteTodoInDb");
             }

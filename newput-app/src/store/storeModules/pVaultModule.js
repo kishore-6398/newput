@@ -50,7 +50,9 @@ const actions = {
     async getVaultDataFromDb({ commit, getters }){
         try{
             var fbdbUrl = getters.getfbdburl;
-            var res = await axios.get(fbdbUrl + 'vaultData.json');
+            var authId = getters.getidToken;
+
+            var res = await axios.get(fbdbUrl + '/vaultData.json?auth=' + authId);
             if(res.status === 200 && res.data !== null){
                 commit('getVaultDataFromDb', res.data);
             }
@@ -66,7 +68,9 @@ const actions = {
     async submitVaultDataToDb({ commit, getters }, payLoad){
         try{
             var fbdbUrl = getters.getfbdburl;
-            var res = await axios.post(fbdbUrl + 'vaultData.json', payLoad);
+            var authId = getters.getidToken;
+
+            var res = await axios.post(fbdbUrl + '/vaultData.json?auth=' + authId, payLoad);
             if(res.status === 200 && res.data !== null){
                 commit('submitVaultDataToDb');
             }
@@ -79,13 +83,15 @@ const actions = {
     async updateVaultDetailInDb({ commit, getters }, payLoad){
         try{
             var fbdbUrl = getters.getfbdburl;
+            var authId = getters.getidToken;
+
             var vaultData = {
                 vaultName: payLoad.vaultName,
                 vaultPassword: payLoad.vaultPassword,
                 vaultUrl: payLoad.vaultUrl,
                 vaultTag: payLoad.vaultTag
             }
-            var res = await axios.put(fbdbUrl + 'vaultData/' + payLoad.id + '.json', vaultData);
+            var res = await axios.put(fbdbUrl + '/vaultData/' + payLoad.id + '.json?auth=' + authId, vaultData);
             if(res.status === 200 && res.data !== null){
                 commit('updateVaultDetailInDb');
             }
@@ -98,7 +104,9 @@ const actions = {
     async deleteVaultDataFromDb({ commit, getters }, payLoad){
         try{
             var fbdbUrl = getters.getfbdburl;
-            var res = await axios.delete(fbdbUrl + 'vaultData/' + payLoad.id + '.json');
+            var authId = getters.getidToken;
+
+            var res = await axios.delete(fbdbUrl + '/vaultData/' + payLoad.id + '.json?auth=' + authId);
             if(res.status === 200){
                 commit('deleteVaultDataFromDb');
             }

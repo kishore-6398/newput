@@ -77,7 +77,9 @@ const actions = {
     async getNotesFromDb({ commit, getters }){
         try{
             var fbdbUrl = getters.getfbdburl;
-            var res = await axios.get(fbdbUrl + 'notes.json');
+            var authId = getters.getidToken;
+
+            var res = await axios.get(fbdbUrl + '/notes.json?auth=' + authId);
             
             if(res.status === 200 && res.data !== null){
                 commit('getNotesFromDb', res.data);
@@ -94,14 +96,16 @@ const actions = {
     async getSingleNoteFromDb({ commit, getters }, payLoad){
         try{
             var fbdbUrl = getters.getfbdburl;
-            var res = await axios.get(fbdbUrl + 'notes/' + payLoad.id + '.json');
+            var authId = getters.getidToken;
+
+            var res = await axios.get(fbdbUrl + '/notes/' + payLoad.id + '.json?auth=' + authId);
 
             if(res.status === 200 && res.data !== null){
                 commit('getSingleNoteFromDb', res.data);
             }
-            // else if(res.data === null){
-            //     commit('resetState');
-            // }
+            else if(res.data === null){
+                router.push("/error");
+            }
         }
         catch(error){
             console.log(error);
@@ -111,7 +115,9 @@ const actions = {
     async saveNotesToDb({ commit, getters }, payLoad){
         try{
             var fbdbUrl = getters.getfbdburl;
-            var res = await axios.post(fbdbUrl + 'notes.json', payLoad);
+            var authId = getters.getidToken;
+
+            var res = await axios.post(fbdbUrl + '/notes.json?auth=' + authId, payLoad);
             
             if(res.status === 200 && res.data !== null){
                 commit('saveNotesToDb');
@@ -125,13 +131,15 @@ const actions = {
     async updateNotesInDb({ commit, getters }, payLoad){
         try{
             var fbdbUrl = getters.getfbdburl;
+            var authId = getters.getidToken;
+
             var notesData = {
                 title: payLoad.title,
                 category: payLoad.category,
                 date: payLoad.date,
                 delta: payLoad.delta
             };
-            var res = await axios.put(fbdbUrl + 'notes/' + payLoad.id + '.json', notesData);
+            var res = await axios.put(fbdbUrl + '/notes/' + payLoad.id + '.json?auth=' + authId, notesData);
             
             if(res.status === 200 && res.data !== null){
                 commit('updateNotesInDb');
@@ -145,7 +153,9 @@ const actions = {
     async deleteNotesFromDb({ commit, getters }, payLoad){
         try{
             var fbdbUrl = getters.getfbdburl;
-            var res = await axios.delete(fbdbUrl + 'notes/' + payLoad.nid + '.json');
+            var authId = getters.getidToken;
+
+            var res = await axios.delete(fbdbUrl + '/notes/' + payLoad.nid + '.json?auth=' + authId);
             
             if(res.status === 200){
                 commit('deleteNotesFromDb');
