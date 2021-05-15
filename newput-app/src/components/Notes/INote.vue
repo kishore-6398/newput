@@ -65,9 +65,6 @@ export default {
 </script>
 
 <style>
-  .col-6{
-    padding: 0 6px;
-  }
   .notesCard{
     background-color: white;
     border-radius: 15px;
@@ -132,5 +129,11 @@ export default {
     font-size: 20px;
     margin-right: 2px;
     color:rgb(0, 132, 255);
+  }
+
+  @media (max-width: 768px){
+    #notescardView{
+      padding: 0 6px;
+    }
   }
 </style>
