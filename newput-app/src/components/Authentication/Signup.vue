@@ -21,7 +21,11 @@
             </div>
             <div>
                 <label for="signupPassword" class="form-label">Password</label>
-                <input type="password" v-model="v$.password.$model" class="form-control" id="signupPassword">
+                <div class="pwd">
+                    <input type="password" v-model="v$.password.$model" class="form-control" id="signupPassword">
+                    <span v-if="toggle" @click="togglepassword" class="material-icons md-eye">visibility_off</span>
+                    <span v-else @click="togglepassword" class="material-icons md-eye">visibility</span>
+                </div>
                 <span v-if="v$.password.$error">
                     <div id="errorText">{{ v$.password.$errors[0].$message }}</div>
                 </span>
@@ -38,7 +42,7 @@
 </template>
 
 <script>
-import { reactive, computed } from 'vue';
+import { reactive, computed,ref } from 'vue';
 import { useStore } from 'vuex';
 import useVuelidate from '@vuelidate/core';
 import { required, email, minLength } from '@vuelidate/validators';
@@ -77,10 +81,25 @@ export default {
             }
         }
 
+        var toggle = ref(true);
+
+        function togglepassword(){
+            var x = document.getElementById("signupPassword");
+            if (x.type === "password") {
+                x.type = "text";
+                toggle.value = false;
+            } else {
+                x.type = "password";
+                toggle.value = true;
+            }
+        }
+
         return{
             signupDetails,
             signupUser,
-            v$
+            v$,
+            togglepassword,
+            toggle
         };
     }
 }
@@ -90,8 +109,8 @@ export default {
     #signupView{
         height: 100vh;
         display: flex;
-        background-color: #ffcfdf;
-        background-image: linear-gradient(315deg, #ffcfdf 0%, #b0f3f1 74%);
+        background-color: #09c7fb;
+        background-image: linear-gradient(315deg, #09c7fb 0%, #93fb9d 74%);
     }
     .SignupCard{
         width: 35%;

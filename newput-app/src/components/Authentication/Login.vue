@@ -14,7 +14,11 @@
             </div>
             <div class="loginPassWrapper">
                 <label for="loginPassword" class="form-label">Password</label>
-                <input v-model="v$.password.$model" type="password" class="form-control" id="loginPassword">
+                <div class="pwd">
+                    <input v-model="v$.password.$model" type="password" class="form-control" id="loginPassword">
+                    <span v-if="toggle" @click="togglepassword" class="material-icons md-eye">visibility_off</span>
+                    <span v-else @click="togglepassword" class="material-icons md-eye">visibility</span>
+                </div>
                 <span v-if="v$.password.$error">
                     <div id="errorText">{{ v$.password.$errors[0].$message }}</div>
                 </span>
@@ -34,7 +38,7 @@
 </template>
 
 <script>
-import { reactive, computed } from 'vue';
+import { reactive, computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import useVuelidate from '@vuelidate/core';
 import { required, email, minLength } from '@vuelidate/validators';
@@ -68,10 +72,25 @@ export default {
             }
         }
 
+        var toggle = ref(true);
+
+        function togglepassword(){
+            var x = document.getElementById("loginPassword");
+            if (x.type === "password") {
+                x.type = "text";
+                toggle.value = false;
+            } else {
+                x.type = "password";
+                toggle.value = true;
+            }
+        }
+
         return{
             loginDetails,
             loginUser,
-            v$
+            v$,
+            togglepassword,
+            toggle
         };
     }
 }
@@ -97,7 +116,17 @@ export default {
     }
     .loginBtn{
         width: 100%;
-         border-radius: 20px;
+        border-radius: 20px;
+        background-color: #e288f9;
+        background-image: linear-gradient(315deg, #e288f9 0%, #ffc988 74%);
+        outline: none;
+        border: none;
+        font-weight: bold;
+    }
+    .loginBtn:focus{
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 4px rgb(221, 167, 231);
     }
     .loginHeader{
         text-align: center;
@@ -123,6 +152,14 @@ export default {
     .fplink{
         text-decoration: none;
         margin-left: auto;
+    }
+    .pwd{
+        display: flex;
+        align-items: center;
+    }
+    .md-eye{
+        cursor: pointer;
+        color: rgb(82, 82, 82);
     }
 
     @media (max-width: 850px){
