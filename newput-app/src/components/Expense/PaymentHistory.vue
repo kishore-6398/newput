@@ -1,6 +1,11 @@
 <template>
     <div id="paymentView">
 
+        <div class="headerandGoback">
+            <router-link class="btn btn-dark" to="/expense/form">Go Back</router-link>
+            <p class="payhistoryheader">Payment History</p>
+        </div>
+
         <div class="filterHistory">
             <select name="yearData" v-model="filterData.data.yearFilter" class="form-select filterYear">
                 <option v-for="year in filteredYears" :key="year" :value="year" >{{ year }}</option>
@@ -111,8 +116,18 @@ export default {
         width: 60%;
         margin: 0 auto;
     }
+    .headerandGoback{
+        margin: 10px 20px 0px 20px;
+        display: flex;
+        align-items: center;
+    }
+    .payhistoryheader{
+        font-size: 24px;
+        font-weight: bold;
+        margin: auto;
+    }
     .filterHistory{
-        margin: 20px 20px 10px 20px;
+        margin: 15px 20px 10px 20px;
         display: flex;
     }
     .filterYear, .filterMonth{
@@ -126,7 +141,7 @@ export default {
     }
     .tag{
         display: flex;
-        margin: 0 20px;
+        margin: 15px 20px;
         color:rgb(4, 0, 255);
     }
     .noData{
@@ -136,8 +151,11 @@ export default {
         margin-top: 50px;
         font-size: larger;
     }
-    .currentbalance, .currentincexp{
-        margin: 0 30px;
+    .currentbalance{
+        margin: 10px 25px;
+    }
+    .currentincexp{
+        margin: 0 25px;
     }
     .currentincexp{
         display: flex;

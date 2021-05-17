@@ -85,6 +85,7 @@ const mutations = {
         sessionStorage.removeItem('refreshToken');
         sessionStorage.removeItem('expirationDate');
 
+        swal("", "You have been logged out successfully!", "success");
         router.push("/login");
     },
 
@@ -152,12 +153,9 @@ const actions = {
                 commit('signupUserInFb', res.data);
                 store.dispatch('saveUserProfileInDb', { name: payLoad.username });
             }
-            else{
-                console.log(res);
-            }
         }
         catch(error){
-            console.log(error);
+            swal(error.response.data.error.message, "", "warning");
         }
     },
 
@@ -174,12 +172,9 @@ const actions = {
             if(res.status === 200 && res.data !== null && res.data.registered === true){
                 commit('loginUserInFb', res.data);
             }
-            else{
-                console.log(res);
-            }
         }
         catch(error){
-            console.log(error);
+            swal(error.response.data.error.message, "", "warning");
         }
     },
 
@@ -206,7 +201,7 @@ const actions = {
             }
         }
         catch(error){
-            console.log(error);
+            swal(error.response.data.error.message, "", "warning");
         }
     },
 
@@ -221,7 +216,7 @@ const actions = {
             }
         }
         catch(error){
-            console.log(error);
+            swal(error.response.data.error.message, "", "warning");
         }
     },
 
@@ -240,7 +235,7 @@ const actions = {
             }
         }
         catch(error){
-            console.log(error);
+            swal(error.response.data.error.message, "There is no user record corresponding to this email!", "warning");
         }
     }
 };
