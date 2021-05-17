@@ -145,7 +145,7 @@ export default {
         display: flex;
     }
     #sidenav ul .routeLink:hover{
-        background-color: rgb(157, 83, 226);
+        background-color: rgb(128, 17, 231);
         cursor: pointer;
     }
     #sidenav .logout{
@@ -157,7 +157,7 @@ export default {
         display: flex;
     }
     #sidenav .logout:hover{
-        background-color: rgb(157, 83, 226);
+        background-color: rgb(128, 17, 231);
         cursor: pointer;
     }
     .routeText{
@@ -235,7 +235,8 @@ export default {
             position: fixed;
             top: 58px;
             left: -100%;
-            background-color: gray;
+            background-color: #6e72fc;
+            background-image: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%);
             height: calc(100vh - 58px);
             transition: 0.5s;
             width: 270px;
@@ -264,7 +265,8 @@ export default {
         #mainNav{
             height: 58px;
             width: 100%;
-            background-color: blueviolet;
+            background-color: #6e72fc;
+            background-image: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%);
             margin-top: 0;
             display: flex;
         }

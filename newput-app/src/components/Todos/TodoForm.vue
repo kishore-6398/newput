@@ -115,7 +115,8 @@ export default {
     }
     .md-mobile-form-create-icon{
         color:rgb(255, 255, 255);
-        background-color: rgb(181, 0, 252);
+        background-color: #6e72fc;
+        background-image: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%);
         font-size: 54px;
         position: fixed;
         bottom: 20px;

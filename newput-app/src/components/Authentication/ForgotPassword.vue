@@ -1,5 +1,5 @@
 <template>
-    <div class="forhotpasswordView">
+    <div class="forgotpasswordView">
         <div class="fpCard">
 
             <div class="fpheader">
@@ -66,9 +66,11 @@ export default {
 </script>
 
 <style>
-    .forhotpasswordView{
-        margin: 50px 20px;
+    .forgotpasswordView{
+        height: 100vh;
         display: flex;
+        background-color: #ffcfdf;
+        background-image: linear-gradient(315deg, #ffcfdf 0%, #b0f3f1 74%);
     }
     .fpCard{
         padding: 20px;
@@ -76,6 +78,7 @@ export default {
         box-shadow: 0 2px 25px rgba(0, 0, 0, 0.1);
         border-radius: 20px;
         margin: auto;
+        background-color: white;
     }
     .fpCard>div{
         margin-bottom: 20px;
@@ -109,6 +112,9 @@ export default {
     }
 
     @media (max-width: 600px){
+        .forgotpasswordView{
+            height: 93vh;
+        }
         .fpCard{
             width: 90%
         }

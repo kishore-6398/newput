@@ -5,7 +5,7 @@
             <img src="../../assets/url-logo.jpg" class="urlimage" width="45" height="45" alt="url img" />
             <h4 class="urltitleheading">URL Manager</h4>
             <router-link to="/url/form" class="btn btn-info newform">Add New Url</router-link>
-            <router-link to="/url/form"><span class="material-icons newvault-icon">add</span></router-link>
+            <router-link to="/url/form"><span class="material-icons newurl-icon">add</span></router-link>
         </div>
 
         <div class="searchandcatcard">
@@ -103,7 +103,7 @@ export default {
     .individual-url{
         margin: 10px 10px 70px 10px;
     }
-    .newvault-icon{
+    .newurl-icon{
         display: none;
     }
     .urlimage{
@@ -126,12 +126,13 @@ export default {
         .newform{
             display: none;
         }
-        .newvault-icon{
+        .newurl-icon{
             display: block;
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgb(213, 2, 255);
+            background-color: #6e72fc;
+            background-image: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%);
             color:white;
             border-radius: 50%;
             width: 55px;

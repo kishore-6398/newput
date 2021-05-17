@@ -127,7 +127,8 @@ export default {
           position: fixed;
           bottom: 20px;
           right: 20px;
-          background: rgb(213, 2, 255);
+          background-color: #6e72fc;
+          background-image: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%);
           color:white;
           border-radius: 50%;
           width: 55px;

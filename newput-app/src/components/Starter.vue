@@ -13,7 +13,7 @@
 
       <div class="row">
 
-        <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-6 cards">
+        <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6 cards">
           <router-link class="card-route" to="/todo" >
             <div class="card-start">
               <img src="../assets/todoCard.png" class="card-img-top-start" alt="newput start image">
@@ -24,7 +24,7 @@
           </router-link>
         </div>
 
-        <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-6 cards">
+        <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6 cards">
           <router-link class="card-route" to="/pvault" >
             <div class="card-start">
               <img src="../assets/passwordCard.jpg" class="card-img-top-start" alt="newput start image">
@@ -35,7 +35,7 @@
           </router-link>
         </div>
 
-        <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-6 cards">
+        <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6 cards">
           <router-link class="card-route" to="/url" >
             <div class="card-start">
               <img src="../assets/urlCard.jpg" class="card-img-top-start" alt="newput start image">
@@ -46,7 +46,7 @@
           </router-link>
         </div>
 
-        <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-6 cards">
+        <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6 cards">
           <router-link class="card-route" to="/notes" >
             <div class="card-start">
               <img src="../assets/notesCard.jpg" class="card-img-top-start" alt="newput start image">
@@ -57,7 +57,7 @@
           </router-link>
         </div>
 
-        <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-6 cards">
+        <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6 cards">
           <router-link class="card-route" to="/expense/form" >
             <div class="card-start">
               <img src="../assets/expenseCard.jpg" class="card-img-top-start" alt="newput start image">
@@ -68,7 +68,7 @@
           </router-link>
         </div>
 
-        <div class="col-xxl-2 col-xl-2 col-lg-4 col-md-4 col-6 cards">
+        <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6 cards">
           <router-link class="card-route" to="/weather" >
             <div class="card-start">
               <img src="../assets/weatherCard.png" class="card-img-top-start" alt="newput start image">
@@ -115,6 +115,9 @@ export default {
     height: 310px;
     width: 310px;
   }
+  .pageTitleWrapper{
+      text-align: center;
+    }
   .pageTitle{
     font-size:55px;
     font-family:'Kalam', cursive;  
@@ -155,7 +158,7 @@ export default {
     color: black;
   }
   .card-route, .card-start:hover{
-    box-shadow: 0 3px 45px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 40px rgba(0, 0, 0, 0.18);
     color: black;
   }
 
@@ -171,12 +174,8 @@ export default {
       height: 200px;
       width: 200px;
     }
-    .pageTitleWrapper{
-      text-align: justify;
-    }
     .pageTitle{
-      font-size:40px; 
-      text-align: center;
+      font-size:40px;
     }
     .pageContent{
       margin-top: 10px;
