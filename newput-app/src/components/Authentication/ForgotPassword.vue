@@ -112,11 +112,8 @@ export default {
     }
 
     @media (max-width: 600px){
-        .forgotpasswordView{
-            height: 93vh;
-        }
         .fpCard{
             width: 90%
         }
-    } 
+    }
 </style>

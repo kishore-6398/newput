@@ -145,16 +145,10 @@ export default {
             width: 55%;
         }
     }
-
     @media (max-width: 550px){
-        #signupView{
-            height: 93vh;
-        }
         .SignupCard{
             width: 100%;
             margin: auto 20px;
         }
     }
-    
-    
 </style>

@@ -151,7 +151,6 @@ export default {
     }
     .fplink{
         text-decoration: none;
-        margin-left: auto;
     }
     .pwd{
         display: flex;
@@ -160,6 +159,7 @@ export default {
     .md-eye{
         cursor: pointer;
         color: rgb(82, 82, 82);
+        margin-left: 8px;
     }
 
     @media (max-width: 850px){
@@ -169,14 +169,9 @@ export default {
     }
 
     @media (max-width: 550px){
-        #loginView{
-            height: 93vh;
-        }
         .LoginCard{
             width: 100%;
             margin: auto 20px;
         }
     }
-    
-    
 </style>

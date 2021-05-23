@@ -201,7 +201,7 @@ export default {
     .emailText{
         margin-left: 20px;
         word-wrap: break-word;
-        width: 170px;
+        width: 180px;
     }
 
 
@@ -239,7 +239,7 @@ export default {
             background-image: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%);
             height: calc(100vh - 58px);
             transition: 0.5s;
-            width: 270px;
+            width: 260px;
             overflow-y:auto;
             scroll-behavior:smooth;
         }
@@ -254,7 +254,7 @@ export default {
             visibility: visible;
             position: fixed !important;
             top:58px;
-            left: 270px;
+            left: 260px;
             right: 0;
             bottom: 0;
             z-index: 3 !important;
