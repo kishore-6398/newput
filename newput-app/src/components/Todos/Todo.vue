@@ -27,11 +27,18 @@
             </div>
         </div>
 
-        <!-- Total display
-        <div id="count">{{ selearch.filter }}: {{ total }}</div> -->
+        <!-- Count display -->
+        <div v-if="selearch.filter === 'All Todos'" class="count" id="allTodosCount">Total: {{ allTodosCount }}</div>
+        <div v-else-if="selearch.filter === 'Pending Todos'" class="count" id="pendingTodosCount">Pending: {{ pendingTodosCount }}</div>
+        <div v-else class="count" id="completedTodosCount">Completed: {{ completedTodosCount }}</div>
 
-        <!--todo list-->
-        <app-ITodo v-for="temp in todosArray" :key="temp.id" :todo="temp" id='todo-list' />
+        <span v-if="todosArray.length > 0">
+            <!--todo list-->
+            <app-ITodo v-for="temp in todosArray" :key="temp.id" :todo="temp" id='todo-list' />
+        </span>
+        <span v-else>
+            <p class="noData">Sorry! No result found :(</p>
+        </span>
     </div>
 </template>
 
@@ -59,11 +66,13 @@ export default {
         
         var selearch = reactive({
             search: '',
-            filter: 'All Todos'
+            filter: 'Pending Todos'
         });
+
         onMounted(() => {
             store.dispatch("getTodosFromDb");
         });
+
         var todosArray = computed(() => {
             return store.getters.gettodosArray.filter(temp => {
                 if(selearch.filter === 'Pending Todos'){
@@ -78,7 +87,9 @@ export default {
             })
         });
 
-        //var total = computed(() => todosArray.value.length);
+        var allTodosCount = computed(() => store.getters.getallTodosCount);
+        var pendingTodosCount = computed(() => store.getters.getpendingTodosCount);
+        var completedTodosCount = computed(() => store.getters.getcompletedTodosCount);
 
         var position = computed(() => {
             return store.getters.getposition;
@@ -89,6 +100,9 @@ export default {
             selearch,
             position,
             dateToday,
+            allTodosCount,
+            pendingTodosCount,
+            completedTodosCount
         };
     }
 }
@@ -135,6 +149,12 @@ h3{
 }
 #searchInput{
     border-radius: 50px;
+}
+.count{
+    margin-left: 22px;
+    font-weight: bold;
+    font-style: italic;
+    font-size: large;
 }
 
 .md-today{

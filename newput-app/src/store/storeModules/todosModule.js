@@ -3,13 +3,25 @@ import { store } from '../store';
 
 const state = () => {
     return{
-        todosArray: []
+        todosArray: [],
+        allTodosCount: 0,
+        pendingTodosCount: 0,
+        completedTodosCount: 0
     };
 };
 
 const getters = {
     gettodosArray(state){
         return state.todosArray;
+    },
+    getallTodosCount(state){
+        return state.allTodosCount;
+    },
+    getpendingTodosCount(state){
+        return state.pendingTodosCount;
+    },
+    getcompletedTodosCount(state){
+        return state.completedTodosCount;
     }
 };
 
@@ -26,6 +38,20 @@ const mutations = {
         });
 
         state.todosArray = values.reverse();
+
+        state.allTodosCount = values.length;
+
+        var pendingTodos = values.filter(temp => {
+            return temp.completed === false;
+        });
+
+        state.pendingTodosCount = pendingTodos.length;
+
+        var completedTodos = values.filter(temp => {
+            return temp.completed === true;
+        });
+
+        state.completedTodosCount = completedTodos.length;
     },
 
     submitTodoToDb(){
