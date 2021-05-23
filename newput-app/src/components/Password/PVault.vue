@@ -23,9 +23,14 @@
             <router-link to="/pvault/form"><span class="material-icons newvault-icon">add</span></router-link>
         </div>
 
-        <div class="individual-vault row">
-            <app-IPVault v-for="temp in vaultData" :key="temp.id" :vault = "temp" />
-        </div>
+        <span v-if="vaultData.length > 0">
+            <div class="individual-vault row">
+                <app-IPVault v-for="temp in vaultData" :key="temp.id" :vault = "temp" />
+            </div>
+        </span>
+        <span v-else>
+            <p class="noData">Sorry! No result found :(</p>
+        </span>
     </div>
 </template>
 

@@ -177,7 +177,8 @@ export default {
     
     .editorContainer{
         width: 100%;
-        height: calc(100vh - 268px);
+        /* totalHeight - navbarHt - savebarHt - toolsbarHt */
+        height: calc(100vh - 58px - 60px - 117px);
     }
     #errorText{
         color: red;
@@ -198,24 +199,28 @@ export default {
         margin-left: 15px;
     }
 
-    @media (min-width: 514px){
+    @media (min-width: 358px){
         .editorContainer{
-            height: calc(100vh - 248px);
+            /* totalHeight - navbarHt - savebarHt - toolsbarHt */
+            height: calc(100vh - 58px - 60px - 93px);
         }
     }
-    @media (min-width: 768px){
+    @media (min-width: 515px){
         .editorContainer{
-            height: calc(100vh - 186px);
+            /* totalHeight - navbarHt - savebarHt - toolsbarHt */
+            height: calc(100vh - 58px - 60px - 68px);
         }
     }
-    @media (min-width: 850px){
+    @media (min-width: 851px){
         .editorContainer{
-            height: calc(100vh - 128px);
+            /* totalHeight - savebarHt - toolsbarHt */
+            height: calc(100vh - 60px - 68px);
         }
     }
-    @media (min-width: 1237px){
+    @media (min-width: 1238px){
         .editorContainer{
-            height: calc(100vh - 103px);
+            /* totalHeight - savebarHt - toolsbarHt */
+            height: calc(100vh - 60px - 43px);
         }
     }
 </style>

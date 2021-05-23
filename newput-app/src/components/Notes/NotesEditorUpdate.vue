@@ -181,53 +181,58 @@ export default {
 </script>
 
 <style>
-  #editor1{
-      position: unset !important;
-  }
-  .ql-picker-active{
-      position: static !important;
-  }
-  .ql-picker-label-active{
-      z-index: -1 !important;
-  }
-  .editContainer{
-      width: 100%;
-      height: calc(100vh - 268px);
-  }
-  .editsaveBar{
-      width: 100%;
-      background-color: rgb(244, 241, 255);
-      height: 60px;
-  }
-  .editbtns{
-      display: flex;
-      padding: 10px 15px 0 15px;
-  }
-  .reset{
-      margin-left: auto;
-  }
-  .update{
-      margin-left: 15px;
-  }
+    #editor1{
+        position: unset !important;
+    }
+    .ql-picker-active{
+        position: static !important;
+    }
+    .ql-picker-label-active{
+        z-index: -1 !important;
+    }
+    .editContainer{
+        width: 100%;
+        /* totalHeight - navbarHt - savebarHt - toolsbarHt */
+        height: calc(100vh - 58px - 60px - 117px);
+    }
+    .editsaveBar{
+        width: 100%;
+        background-color: rgb(244, 241, 255);
+        height: 60px;
+    }
+    .editbtns{
+        display: flex;
+        padding: 10px 15px 0 15px;
+    }
+    .reset{
+        margin-left: auto;
+    }
+    .update{
+        margin-left: 15px;
+    }
 
-  @media (min-width: 514px){
-      .editContainer{
-          height: calc(100vh - 248px);
-      }
-  }
-  @media (min-width: 768px){
-      .editContainer{
-          height: calc(100vh - 186px);
-      }
-  }
-  @media (min-width: 850px){
-      .editContainer{
-          height: calc(100vh - 128px);
-      }
-  }
-  @media (min-width: 1237px){
-      .editContainer{
-          height: calc(100vh - 103px);
-      }
-  }
+    @media (min-width: 358px){
+        .editContainer{
+            /* totalHeight - navbarHt - savebarHt - toolsbarHt */
+            height: calc(100vh - 58px - 60px - 93px);
+        }
+    }
+    @media (min-width: 515px){
+        .editContainer{
+            /* totalHeight - navbarHt - savebarHt - toolsbarHt */
+            height: calc(100vh - 58px - 60px - 68px);
+        }
+    }
+    @media (min-width: 851px){
+        .editContainer{
+            /* totalHeight - savebarHt - toolsbarHt */
+            height: calc(100vh - 60px - 68px);
+        }
+    }
+    @media (min-width: 1238px){
+        .editContainer{
+            /* totalHeight - savebarHt - toolsbarHt */
+            height: calc(100vh - 60px - 43px);
+        }
+    }
 </style>

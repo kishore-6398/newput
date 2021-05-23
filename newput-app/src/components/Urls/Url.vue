@@ -19,9 +19,15 @@
             </div>
         </div>
         
-        <div class="row individual-url">
-            <app-IUrl v-for="temp in urlData" :key="temp.id" :urlData="temp" />
-        </div>
+        <span v-if="urlData.length > 0">
+            <div class="row individual-url">
+                <app-IUrl v-for="temp in urlData" :key="temp.id" :urlData="temp" />
+            </div>
+        </span>
+        <span v-else>
+            <p class="noData">Sorry! No result found :(</p>
+        </span>
+        
     </div>
 </template>
 
