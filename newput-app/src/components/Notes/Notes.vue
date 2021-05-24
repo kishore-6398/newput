@@ -4,7 +4,7 @@
     <div class="titlenotecard">
         <img src="../../assets/notes.png" class="notesimage" width="45" height="45" alt="notes img" />
         <h4 class="notestitleheading">Notes Editor</h4>
-        <router-link to="/noteseditor" class="btn btn-info newnote">Add New Notes</router-link>
+        <router-link to="/noteseditor" class="btn newnoteBtn">Add New Notes</router-link>
         <router-link to="/noteseditor"><span class="material-icons newnote-icon">add</span></router-link>
     </div>
 
@@ -87,9 +87,25 @@ export default {
   .notestitleheading{
     margin-top: 5px;
   }
-  .newnote{
-      margin-left: auto;
-  }
+  .newnoteBtn{
+        margin-left: auto;
+        background-color: #f977ce;
+        background-image: linear-gradient(315deg, #f977ce 0%, #c373f2 74%);
+        color: white;
+        outline: none;
+        border: none;
+        font-weight: bold;
+    }
+    .newnoteBtn:hover{
+        color: white;
+        background-color: #f977ce;
+        background-image: linear-gradient(315deg, #fd94da 0%, #d399f5 74%);
+    }
+    .newnoteBtn:focus{
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 3px rgb(253, 253, 216);
+    }
   .individual-note{
     margin: 5px 10px 70px 10px;
   }
@@ -124,7 +140,7 @@ export default {
     }
   }
   @media(max-width: 850px){
-      .newnote{
+      .newnoteBtn{
           display: none;
       }
       .newnote-icon{

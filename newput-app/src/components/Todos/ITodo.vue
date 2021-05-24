@@ -3,7 +3,7 @@
         <div class="todo-bar"  :class="{ 'todo-complete': todo.completed }">
             <div class="todo-tick" @click="updateTickIcon">
                 <span v-if="!todo.completed" class="md-tick-grey material-icons" >check_circle_outline</span>
-                <span v-else class="md-tick-green material-icons" >check_circle</span>
+                <span v-else class="md-tick-violet material-icons" >check_circle</span>
             </div>
 
             <div class="todo-cap" @click="cloneData" data-bs-toggle="modal" :data-bs-target="'#updateTodoModal' + todo.id">
@@ -40,7 +40,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" @click="updateTodo" :disabled="!tododata.todoObj.todoMsg">Save Changes</button>
+                        <button type="button" class="btn saveBtn" @click="updateTodo" :disabled="!tododata.todoObj.todoMsg">Save Changes</button>
                     </div>
                 </div>
             </div>
@@ -124,13 +124,17 @@ export default {
 
 <style>
     .todo-bar{
-        border: 1px solid lightgray;
+        box-shadow: 0 0 2px rgba(0, 0, 0 , 0.4);
         border-radius: 15px;
-        margin: 10px 0 0 0;
+        margin: 14px 0 0 0;
         width: 100%;
         cursor: pointer;
         display: inline-flex;
-        transition: 0.3s ease-in-out;
+        transition: 0.5s ease-in-out;
+    }
+    .todo-bar:hover{
+        background-color: rgb(245, 245, 245);
+        transition: 0.5s;
     }
     .todo-tick{
         padding: 10px 5px 10px 10px;
@@ -152,13 +156,34 @@ export default {
     .todo-cap .fulldate{
         padding: 2px 0 0 2px;
     }
+    .saveBtn{
+        background-color: #7cffcb;
+        background-image: linear-gradient(315deg, #00a2ff 0%, #1df0aa 74%);
+        color: white;
+        outline: none;
+        border: none;
+        font-weight: bold;
+    }
+    .saveBtn:hover{
+        color: white;
+        background-color: #7cffcb;
+        background-image: linear-gradient(315deg, #20acfd 0%, #4cfd9c 74%);
+    }
+    .saveBtn:focus{
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 3px rgb(205, 255, 238);
+    }
     .md-tick-grey{
         color: rgb(170, 170, 170);
         font-size: 30px;
         transition: 0.2s;
     }
-    .md-tick-green{
-        color: rgb(6, 250, 67);
+    .md-tick-violet{
+        /* color: rgb(6, 250, 67); */
+        color: rgb(199, 73, 248);
+        background-color: white;
+        border-radius: 50%;
         font-size: 30px;
         transition: 0.2s;
     }
@@ -172,7 +197,12 @@ export default {
         -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
     }
     .todo-complete{
-        background-color: rgb(250, 236, 246);
+        background-color: rgb(197, 255, 202);
+        transition: 0.5s;
+    }
+    .todo-complete:hover{
+        background-color: rgb(217, 255, 221);
+        transition: 0.5s;
     }
     .todo-complete .todo-complete-text{
         text-decoration: line-through;

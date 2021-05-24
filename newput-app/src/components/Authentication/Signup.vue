@@ -31,7 +31,7 @@
                 </span>
             </div>
             <div>
-                <button @click="signupUser" class="btn btn-primary signupBtn">Sign Up</button>
+                <button @click="signupUser" class="btn signupBtn">Sign Up</button>
             </div>
             <div class="signupFooter">
                 <span>Already have an account? </span>
@@ -123,10 +123,6 @@ export default {
     .SignupCard>div{
         margin-bottom: 20px;
     }
-    .signupBtn{
-        width: 100%;
-        border-radius: 20px;
-    }
     .signupHeader{
         text-align: center;
         display: flex;
@@ -138,6 +134,26 @@ export default {
     }
     .SignupCard .loginFooter{
         margin-bottom: 10px;
+    }
+    .signupBtn{
+        width: 100%;
+        border-radius: 20px;
+        background-color: #09c7fb;
+        background-image: linear-gradient(315deg, #09c7fb 0%, #93fb9d 74%);
+        color: white;
+        outline: none;
+        border: none;
+        font-weight: bold;
+    }
+    .signupBtn:hover{
+        color: white;
+        background-color: #09c7fb;
+        background-image: linear-gradient(315deg, #31cdf8 0%, #a3ffac 74%);
+    }
+    .signupBtn:focus{
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 3px rgb(169, 250, 232);
     }
 
     @media (max-width: 850px){

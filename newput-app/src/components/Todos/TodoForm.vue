@@ -17,7 +17,7 @@
                 <div class="col-lg-4 col-md-4">
                     <label class="form-label d-md-block d-none" style="visibility: hidden">Submit</label>
                     <div>
-                        <button class="btn btn-primary w-100" @click="submitTodo" :disabled="!todoData.todosModel.todoMsg" >Add Todo</button>
+                        <button class="btn addTodoBtn w-100" @click="submitTodo" :disabled="!todoData.todosModel.todoMsg" >Add Todo</button>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary" @click="submitTodo" :disabled="!todoData.todosModel.todoMsg">Add Todo</button>
+                            <button type="button" class="btn saveBtn" @click="submitTodo" :disabled="!todoData.todosModel.todoMsg">Add Todo</button>
                         </div>
                     </div>
                 </div>
@@ -96,34 +96,54 @@ export default {
 </script>
 
 <style>
-.card-form{
-    border-radius: 10px;
-    padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.12);
-}
-.mobile-form-create, .md-mobile-form-create-icon{
-    display: none;
-}
-@media (max-width: 850px){
     .card-form{
-        display: none;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.12);
     }
     .mobile-form-create, .md-mobile-form-create-icon{
-        display: block;
+        display: none;
     }
-    .md-mobile-form-create-icon{
-        color:rgb(255, 255, 255);
-        background-color: #6e72fc;
-        background-image: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%);
-        font-size: 54px;
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        border-radius: 50%;
-        cursor: pointer;
-        box-shadow: 0 5px 40px 5px rgba(0, 0, 0, 0.12);
+    .addTodoBtn{
+        width: 100%;
+        background-color: #f977ce;
+        background-image: linear-gradient(315deg, #f977ce 0%, #c373f2 74%);
+        color: white;
+        outline: none;
+        border: none;
+        font-weight: bold;
     }
-}
+    .addTodoBtn:hover{
+        color: white;
+        background-color: #f977ce;
+        background-image: linear-gradient(315deg, #fd94da 0%, #d399f5 74%);
+    }
+    .addTodoBtn:focus{
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 3px rgb(197, 238, 250);
+    }
+
+    @media (max-width: 850px){
+        .card-form{
+            display: none;
+        }
+        .mobile-form-create, .md-mobile-form-create-icon{
+            display: block;
+        }
+        .md-mobile-form-create-icon{
+            color:rgb(255, 255, 255);
+            background-color: #6e72fc;
+            background-image: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%);
+            font-size: 54px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 5px 40px 5px rgba(0, 0, 0, 0.12);
+        }
+    }
 </style>

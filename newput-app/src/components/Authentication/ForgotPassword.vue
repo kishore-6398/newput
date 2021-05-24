@@ -15,7 +15,7 @@
             </div>
 
             <div>
-                <button class="btn btn-secondary forgotbtn" @click="forgotPassword" :disabled="v$.email.$error">Request reset link</button>
+                <button class="btn forgotbtn" @click="forgotPassword" :disabled="v$.email.$error">Request reset link</button>
             </div>
 
             <div class="btlwrapper">
@@ -90,6 +90,23 @@ export default {
     }
     .forgotbtn{
         width: 100%;
+        border-radius: 20px;
+        background-color: #ffcfdf;
+        background-image: linear-gradient(315deg, #ffcfdf 0%, #b0f3f1 74%);
+        color: rgb(70, 70, 70);
+        outline: none;
+        border: none;
+        font-weight: bold;
+    }
+    .forgotbtn:hover{
+        color: rgb(70, 70, 70);;
+        background-color: #ffcfdf;
+        background-image: linear-gradient(315deg, #ffdee9 0%, #cbfdfc 74%);
+    }
+    .forgotbtn:focus{
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 3px rgb(192, 253, 240);
     }
     .fpCard .btlwrapper{
         text-align: center;

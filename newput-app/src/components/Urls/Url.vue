@@ -4,7 +4,7 @@
         <div class="titlecard">
             <img src="../../assets/url-logo.jpg" class="urlimage" width="45" height="45" alt="url img" />
             <h4 class="urltitleheading">URL Manager</h4>
-            <router-link to="/url/form" class="btn btn-info newform">Add New Url</router-link>
+            <router-link to="/url/form" class="btn newformBtn">Add New Url</router-link>
             <router-link to="/url/form"><span class="material-icons newurl-icon">add</span></router-link>
         </div>
 
@@ -88,8 +88,24 @@ export default {
         display: flex;
         align-items: center;
     }
-   .newform{
+    .newformBtn{
         margin-left: auto;
+        background-color: #f977ce;
+        background-image: linear-gradient(315deg, #f977ce 0%, #c373f2 74%);
+        color: white;
+        outline: none;
+        border: none;
+        font-weight: bold;
+    }
+    .newformBtn:hover{
+        color: white;
+        background-color: #f977ce;
+        background-image: linear-gradient(315deg, #fd94da 0%, #d399f5 74%);
+    }
+    .newformBtn:focus{
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 3px rgb(255, 218, 255);
     }
     .searchandcatcard{
         background-color: white;
@@ -129,7 +145,7 @@ export default {
         }
     }
     @media(max-width: 850px){
-        .newform{
+        .newformBtn{
             display: none;
         }
         .newurl-icon{

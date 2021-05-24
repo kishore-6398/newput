@@ -28,7 +28,7 @@
             </div>
             <div class="savebtngroup">
                 <router-link to="/url" class="btn btn-secondary backbtn">Go Back</router-link>
-                <button class="btn btn-primary savebtn" @click="submitURL">Add URL</button>
+                <button class="btn saveBtn" @click="submitURL">Add URL</button>
             </div>
         </div>
     </div>
@@ -109,7 +109,7 @@ export default {
         text-align: right;
         margin-top: 5px;
     }
-    .savebtn{
+    .savebtngroup .saveBtn{
         margin-left: 10px;
     }
 
@@ -124,7 +124,7 @@ export default {
         .savebtngroup{
             display: flex;
         }
-        .savebtn, .backbtn{
+        .savebtngroup .btn, .backbtn{
             width: 50%;
         }
     }

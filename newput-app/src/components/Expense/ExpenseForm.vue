@@ -4,7 +4,7 @@
         <div class="titleCard">
             <img src="../../assets/expense.jpg" class="expenseIcon" width="45" height="45" alt="expense icon">
             <div class="titleName">Expense Tracker</div>
-            <router-link to="/paymenthistory" class="btn btn-primary phistorybtn">Payment History</router-link>
+            <router-link to="/paymenthistory" class="btn phistorybtn">Payment History</router-link>
         </div>
 
         <div class="totalbalance">
@@ -168,6 +168,22 @@ export default {
     }
     .phistorybtn{
         margin-left: auto;
+        background-color: #0499f2;
+        background-image: linear-gradient(315deg, #0499f2 0%, #26f596 74%);
+        color: white;
+        outline: none;
+        border: none;
+        font-weight: 600;
+    }
+    .phistorybtn:hover{
+        background-color: #0499f2;
+        background-image: linear-gradient(315deg, #30b1fc 0%, #4dfcaa 74%);
+        color: white;
+    }
+    .phistorybtn:focus{
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 3px rgb(199, 243, 206);
     }
     .totalbalance{
         margin: 20px auto;
@@ -213,13 +229,18 @@ export default {
     .btnTransac{
         width: 100%;
         margin: 2px 0 2px 0;
-        background: rgb(189, 7, 245);
+        background: linear-gradient(to right, #b10aff 0%, #ff52f9 100%);
+        font-weight: 600;
         color: white;
+    }
+    .btnTransac:hover{
+        background: linear-gradient(to right, #c552fa 0%, #f8a7f5 100%);
+        color: white; 
     }
     .btnTransac:focus{
         color: white;
         outline: none;
-        box-shadow: 0 0 0 4px rgb(227, 164, 247);
+        box-shadow: 0 0 0 3px rgb(227, 164, 247);
     }
     .cardHeader{
         text-align: center;

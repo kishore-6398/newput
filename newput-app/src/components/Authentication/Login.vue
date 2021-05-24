@@ -27,7 +27,7 @@
                 <router-link to="/forgotpassword" class="fplink">Forgot Password?</router-link>
             </div>
             <div>
-                <button @click="loginUser" class="btn btn-primary loginBtn">Login</button>
+                <button @click="loginUser" class="btn loginBtn">Login</button>
             </div>
             <div class="loginFooter">
                 <span>Doesn't have an account yet? </span>
@@ -119,14 +119,20 @@ export default {
         border-radius: 20px;
         background-color: #e288f9;
         background-image: linear-gradient(315deg, #e288f9 0%, #ffc988 74%);
+        color: white;
         outline: none;
         border: none;
         font-weight: bold;
     }
+    .loginBtn:hover{
+        color: white;
+        background-color: #e288f9;
+        background-image: linear-gradient(315deg, #e79cfa 0%, #fdd4a1 74%);
+    }
     .loginBtn:focus{
         outline: none;
         border: none;
-        box-shadow: 0 0 0 4px rgb(221, 167, 231);
+        box-shadow: 0 0 0 3px rgb(255, 218, 255);
     }
     .loginHeader{
         text-align: center;

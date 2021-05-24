@@ -2,7 +2,7 @@
     <div id="paymentView">
 
         <div class="headerandGoback">
-            <router-link class="btn btn-dark" to="/expense/form">Go Back</router-link>
+            <router-link class="btn goBackBtn" to="/expense/form">Go Back</router-link>
             <p class="payhistoryheader">Payment History</p>
         </div>
 
@@ -117,9 +117,27 @@ export default {
         margin: 0 auto;
     }
     .headerandGoback{
-        margin: 10px 20px 0px 20px;
+        margin: 20px;
         display: flex;
         align-items: center;
+    }
+    .goBackBtn{
+        background-color: #5b6467;
+        background-image: linear-gradient(315deg, #5b6467 0%, #8b939a 74%);
+        color: white;
+        outline: none;
+        border: none;
+        font-weight: bold;
+    }
+    .goBackBtn:hover{
+        color: white;
+        background-color: #5b6467;
+        background-image: linear-gradient(315deg, #697275 0%, #a1a8af 74%);
+    }
+    .goBackBtn:focus{
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 3px rgb(245, 245, 245);
     }
     .payhistoryheader{
         font-size: 24px;

@@ -8,7 +8,7 @@
             <div class="title">
                 <h4>Password Vault</h4>
             </div>
-            <router-link to="/pvault/form" class="btn btn-info">Create New Login</router-link>
+            <router-link to="/pvault/form" class="btn newPassBtn">Create New Login</router-link>
         </div>
 
         <div class="header-mobile">
@@ -92,6 +92,24 @@ export default {
     }
     .icon{
         display:none;
+    }
+    .newPassBtn{
+        background-color: #f977ce;
+        background-image: linear-gradient(315deg, #f977ce 0%, #c373f2 74%);
+        color: white;
+        outline: none;
+        border: none;
+        font-weight: bold;
+    }
+    .newPassBtn:hover{
+        color: white;
+        background-color: #f977ce;
+        background-image: linear-gradient(315deg, #fd94da 0%, #d399f5 74%);
+    }
+    .newPassBtn:focus{
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 3px rgb(200, 223, 253);
     }
 
     @media(max-width: 850px){

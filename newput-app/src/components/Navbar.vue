@@ -175,6 +175,7 @@ export default {
     .userprofile{
         margin: 15px 0 0 20px;
         color: white;
+        font-size: 16px;
     }
     .userIcon{
         border-radius: 50%;
@@ -191,7 +192,7 @@ export default {
         align-items: center;
     }
     .usermail{
-        margin-top: 10px;
+        margin-top: 12px;
     }
     .nameText{
         margin-left: 14px;
@@ -285,6 +286,17 @@ export default {
             color: white;
             font-size: 34px;
             cursor: pointer;
+        }
+    }
+
+    @media (max-width: 768px){
+        #sidenav ul .routeLink, #sidenav .logout{
+            padding: 17px 0 17px 20px;
+            font-size: 17px;
+        }
+        .userprofile{
+            margin: 20px 0 0 20px;
+            font-size: 17px;
         }
     }
 </style>

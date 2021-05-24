@@ -18,7 +18,7 @@
             <div class="card-start">
               <img src="../assets/todoCard.png" class="card-img-top-start" alt="newput start image">
               <div class="card-body-start">
-                <p class="card-title-start">Todo List</p>
+                <p class="card-title-start">Todo</p>
               </div>
             </div>
           </router-link>
@@ -29,7 +29,7 @@
             <div class="card-start">
               <img src="../assets/passwordCard.jpg" class="card-img-top-start" alt="newput start image">
               <div class="card-body-start">
-                <p class="card-title-start">Password Vault</p>
+                <p class="card-title-start">Password</p>
               </div>
             </div>
           </router-link>
@@ -40,7 +40,7 @@
             <div class="card-start">
               <img src="../assets/urlCard.jpg" class="card-img-top-start" alt="newput start image">
               <div class="card-body-start">
-                <p class="card-title-start">URL Manager</p>
+                <p class="card-title-start">URL</p>
               </div>
             </div>
           </router-link>
@@ -51,7 +51,7 @@
             <div class="card-start">
               <img src="../assets/notesCard.jpg" class="card-img-top-start" alt="newput start image">
               <div class="card-body-start">
-                <p class="card-title-start">Notes Editor</p>
+                <p class="card-title-start">Notes</p>
               </div>
             </div>
           </router-link>
@@ -62,7 +62,7 @@
             <div class="card-start">
               <img src="../assets/expenseCard.jpg" class="card-img-top-start" alt="newput start image">
               <div class="card-body-start">
-                <p class="card-title-start">Expense Tracker</p>
+                <p class="card-title-start">Expense</p>
               </div>
             </div>
           </router-link>
@@ -73,7 +73,7 @@
             <div class="card-start">
               <img src="../assets/weatherCard.png" class="card-img-top-start" alt="newput start image">
               <div class="card-body-start">
-                <p class="card-title-start">World Weather</p>
+                <p class="card-title-start">Weather</p>
               </div>
             </div>
           </router-link>
@@ -129,7 +129,7 @@ export default {
   .card-start{
     margin-top: 20px;
     position: unset !important;
-    min-height: 225px;
+    min-height: 180px;
     border: none;
     border-radius: 20px;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.12);
