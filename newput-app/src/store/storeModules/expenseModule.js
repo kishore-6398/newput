@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { store } from '../store';
 import { router } from '../../routes/routes';
+import swal from 'sweetalert';
 
 const state = () => {
     return{
@@ -155,31 +156,31 @@ const actions = {
 
     async getTransactionsFromDb({ commit, getters }){
         try{
-            var fbdbUrl = getters.getfbdburl;
+            var fbdbUrl = getters.getfbdburlsettings;
             var authId = getters.getidToken;
 
-            var res = await axios.get(fbdbUrl + '/expenses.json?auth=' + authId);
+            var res = await axios.get(fbdbUrl + '/personal/expenses.json?auth=' + authId);
             if(res.status === 200 && res.data !== null){
                 commit('getTransactionsFromDb', res.data);
             }
         }
         catch(error){
-            console.log(error);
+            swal("", error.response.data.error, "error");
         }
     },
 
     async saveTransactionToDb({ commit, getters }, payLoad){
         try{
-            var fbdbUrl = getters.getfbdburl;
+            var fbdbUrl = getters.getfbdburlsettings;
             var authId = getters.getidToken;
 
-            var res = await axios.post(fbdbUrl + '/expenses.json?auth=' + authId, payLoad);
+            var res = await axios.post(fbdbUrl + '/personal/expenses.json?auth=' + authId, payLoad);
             if(res.status === 200 && res.data !== null){
                 commit('saveTransactionToDb');
             }
         }
         catch(error){
-            console.log(error);
+            swal("", error.response.data.error, "error");
         }
     }
 

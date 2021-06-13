@@ -3,6 +3,7 @@ import summer from "../../assets/summer.png";
 import sunny from "../../assets/sunny.jpg";
 import cool from "../../assets/cool.jpg";
 import winter from "../../assets/winter.jpg";
+import swal from 'sweetalert';
 
 const state = () => {
     return{
@@ -80,7 +81,7 @@ const actions = {
             }
         }
         catch(error){
-            console.log(error);
+            swal("", error.response.data.error.message, "error");
         }
     }
 };

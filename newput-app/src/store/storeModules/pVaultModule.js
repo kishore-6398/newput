@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { router } from '../../routes/routes';
 import { store } from '../store';
+import swal from 'sweetalert';
 
 const state = () => {
     return{
@@ -61,7 +62,7 @@ const actions = {
             }
         }
         catch(error){
-            console.log(error);
+            swal("", error.response.data.error, "error");
         }
     },
 
@@ -76,7 +77,7 @@ const actions = {
             }
         }
         catch(error){
-            console.log(error);
+            swal("", error.response.data.error, "error");
         }
     },
     
@@ -97,7 +98,7 @@ const actions = {
             }
         }
         catch(error){
-            console.log(error);
+            swal("", error.response.data.error, "error");
         }
     },
 
@@ -112,7 +113,7 @@ const actions = {
             }
         }
         catch(error){
-            console.log(error);
+            swal("", error.response.data.error, "error");
         }
     }
 };
