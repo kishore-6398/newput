@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { store } from '../store';
+import swal from 'sweetalert';
 
 const state = () => {
     return{
@@ -34,6 +35,18 @@ const mutations = {
 
         values.forEach(temp => {
             temp.id = keys[i];
+
+            //time conversion
+            if(temp.dueDate !== ''){
+                var dueDateOld = temp.dueDate;
+                var date = dueDateOld.slice(8);
+                var month = parseInt(dueDateOld.slice(5, 7));
+                var year = dueDateOld.slice(0, 4);
+                const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+                temp.dueDate = date + ' ' + months[month - 1] + ' ' + year;
+            }
+
             i++;
         });
 
@@ -67,6 +80,9 @@ const mutations = {
     },
     resetState(state){
         state.todosArray = [];
+        state.allTodosCount = 0;
+        state.pendingTodosCount = 0;
+        state.completedTodosCount = 0;
     }
 
 };
@@ -87,7 +103,7 @@ const actions = {
             }
         }
         catch(error){
-            console.log(error);
+            swal("", error.response.data.error, "error");
         }
     },
 
@@ -102,7 +118,7 @@ const actions = {
             }
         }
         catch(error){
-            console.log(error);
+            swal("", error.response.data.error, "error");
         }
     },
 
@@ -110,6 +126,7 @@ const actions = {
         try{
             var dbUrl = getters.getfbdburl;
             var authId = getters.getidToken;
+
             var todoObjWithoutId = {
                 todoMsg: payLoad.todoMsg,
                 dueDate: payLoad.dueDate,
@@ -121,7 +138,7 @@ const actions = {
             }
         }
         catch(error){
-            console.log(error);
+            swal("", error.response.data.error, "error");
         }
     },
 
@@ -136,7 +153,7 @@ const actions = {
             }
         }
         catch(error){
-            console.log(error);
+            swal("", error.response.data.error, "error");
         }
     }
 

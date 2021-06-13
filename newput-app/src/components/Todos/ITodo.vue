@@ -10,7 +10,7 @@
                 <span class="text-truncate todo-complete-text">{{ todo.todoMsg }}</span><br/>
                 <div class="date" v-if="todo.dueDate">
                     <span class="md-date material-icons">date_range</span>
-                    <div class="fulldate">{{ filteredDate }}</div>
+                    <div class="fulldate">{{ todo.dueDate }}</div>
                 </div>
             </div>
 
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { reactive, computed } from 'vue';
+import { reactive } from 'vue';
 import { useStore } from 'vuex';
 //close bootstrap modal
 import { Modal } from 'bootstrap';
@@ -65,7 +65,29 @@ export default {
         });
         
         function cloneData(){
-            tododata.todoObj = Object.assign({}, props.todo);
+            var bridge = Object.assign({}, props.todo);
+            tododata.todoObj.todoMsg = bridge.todoMsg;
+            tododata.todoObj.completed = bridge.completed;
+            tododata.todoObj.id = bridge.id;
+            
+            //time conversion
+            if(tododata.todoObj.dueDate !== ''){
+                var dueDateOld = bridge.dueDate;
+                var date = dueDateOld.slice(0, 2);
+                var m = dueDateOld.slice(3, 6);
+                var year = dueDateOld.slice(7);
+                const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                var month = months.indexOf(m);
+                var mInt = month + 1;
+                if(mInt < 10){
+                    mInt = '0' + mInt;
+                }
+                
+                tododata.todoObj.dueDate = year + '-' + mInt + '-' + date;
+            }
+            else{
+                tododata.todoObj.dueDate = bridge.dueDate;
+            }
         }
 
         function updateTodo(){
@@ -100,23 +122,22 @@ export default {
             });
         }
 
-        var filteredDate = computed(() => {
-            var dueDateOld = props.todo.dueDate;
-            var date = dueDateOld.slice(8);
-            var month = parseInt(dueDateOld.slice(5, 7));
-            var year = dueDateOld.slice(0, 4);
-            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        // var filteredDate = computed(() => {
+        //     var dueDateOld = props.todo.dueDate;
+        //     var date = dueDateOld.slice(8);
+        //     var month = parseInt(dueDateOld.slice(5, 7));
+        //     var year = dueDateOld.slice(0, 4);
+        //     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-            return date + ' ' + months[month - 1] + ' ' + year;
-        });
+        //     return date + ' ' + months[month - 1] + ' ' + year;
+        // });
 
         return{
             tododata,
             cloneData,
             updateTodo,
             updateTickIcon,
-            deleteTodo,
-            filteredDate
+            deleteTodo
         };
     }
 }
@@ -154,7 +175,7 @@ export default {
         display: flex;
     }
     .todo-cap .fulldate{
-        padding: 2px 0 0 2px;
+        padding: 4px 0 0 2px;
     }
     .saveBtn{
         background-color: #7cffcb;

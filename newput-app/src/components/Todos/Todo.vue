@@ -76,13 +76,13 @@ export default {
         var todosArray = computed(() => {
             return store.getters.gettodosArray.filter(temp => {
                 if(selearch.filter === 'Pending Todos'){
-                    return temp.todoMsg.toLowerCase().match(selearch.search.toLowerCase()) && temp.completed === false;
+                    return temp.completed === false && (temp.todoMsg.toLowerCase().match(selearch.search.toLowerCase()) || temp.dueDate.toLowerCase().match(selearch.search.toLowerCase()));
                 }
                 else if(selearch.filter === 'Completed Todos'){
-                    return temp.todoMsg.toLowerCase().match(selearch.search.toLowerCase()) && temp.completed === true;
+                    return temp.completed === true && (temp.todoMsg.toLowerCase().match(selearch.search.toLowerCase()) || temp.dueDate.toLowerCase().match(selearch.search.toLowerCase()));
                 }
                 else if(selearch.filter === 'All Todos'){
-                    return temp.todoMsg.toLowerCase().match(selearch.search.toLowerCase());
+                    return temp.todoMsg.toLowerCase().match(selearch.search.toLowerCase()) || temp.dueDate.toLowerCase().match(selearch.search.toLowerCase());
                 }
             })
         });
