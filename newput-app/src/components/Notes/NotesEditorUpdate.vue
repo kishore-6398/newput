@@ -132,7 +132,7 @@ export default {
             noteData.cloneSingleNote.date = updatedate;
             noteData.cloneSingleNote.delta = quill.getContents();
             noteData.cloneSingleNote.id = route.params.id;
-            //console.log(noteData.cloneSingleNote);
+            
             store.dispatch('updateNotesInDb', noteData.cloneSingleNote);
 
             //close bootstrap modal

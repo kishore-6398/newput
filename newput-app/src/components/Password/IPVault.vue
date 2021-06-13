@@ -1,5 +1,5 @@
 <template>
-    <div id="vaultdata" class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-12">
+    <div id="vaultdata" class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
 
         <div class="vault-card">
             <div class="vault-title">

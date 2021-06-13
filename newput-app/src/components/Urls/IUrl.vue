@@ -1,5 +1,5 @@
 <template>
-    <div id="iurlDataView" class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-12">
+    <div id="iurlDataView" class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
         <div class="urlcard">
             <div class="urlcardtag">
                 <span class="material-icons md-bookmark">star</span>
