@@ -26,6 +26,11 @@
                 <span class="material-icons md-mail">mail</span>
                 <div class="emailText text-wrap">{{ email }}</div>
             </div>
+            <div class="userprofileName">
+                <span v-if="profile === 'personal'" class="material-icons md-personal">person</span>
+                <span v-else class="material-icons md-work">work</span>
+                <div class="profileText text-wrap">{{ profile }}</div>
+            </div>
         </div>
 
         <div class="hrnav"></div>
@@ -57,6 +62,13 @@
             </router-link>
         </ul>
 
+        <div class="hrnav1"></div>
+        
+        <router-link @click="navToggleMethod" class="settings" to="/settings" >
+            <span class="material-icons md-settings">settings</span>
+            <span class="routeText">Settings</span>
+        </router-link>
+
         <div @click="logout" class="logout">
             <span class="material-icons md-logout">logout</span>
             <span class="routeText logoutText">LogOut</span>
@@ -72,6 +84,7 @@
 <script>
 import { ref, computed } from 'vue'
 import { useStore }from 'vuex';
+import swal from 'sweetalert';
 
 export default {
     setup(){
@@ -80,6 +93,7 @@ export default {
 
         var name = computed(() => store.getters.getUsername);
         var email = computed(() => store.getters.getuserEmail);
+        var profile = computed(() => store.getters.getProfile);
 
         function navToggleMethod(){
             navToggle.value = !navToggle.value;
@@ -92,7 +106,18 @@ export default {
         }
 
         function logout(){
-            store.dispatch('logoutUser');
+            swal({
+                title: "Confirm Logout",
+                text: "Are you sure you want to Logout?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willLogout) => {
+                    if (willLogout) {
+                        store.dispatch('logoutUser');
+                    }
+            });
         }
 
         return{
@@ -101,7 +126,8 @@ export default {
             navToggleFalse,
             logout,
             name,
-            email
+            email,
+            profile
         }
     } 
 }
@@ -148,7 +174,7 @@ export default {
         background-color: rgb(128, 17, 231);
         cursor: pointer;
     }
-    #sidenav .logout{
+    #sidenav .logout, #sidenav .settings{
         padding: 15px 0 15px 20px;
         text-decoration: none;
         color: white;
@@ -156,7 +182,10 @@ export default {
         transition: 0.3s;
         display: flex;
     }
-    #sidenav .logout:hover{
+    #sidenav .settings{
+        margin-top: 1px;
+    }
+    #sidenav .logout:hover, #sidenav .settings:hover{
         background-color: rgb(128, 17, 231);
         cursor: pointer;
     }
@@ -172,6 +201,12 @@ export default {
         background-color: white;
         margin: 20px 0 0 0;
     }
+    .hrnav1{
+        height: 0.5px;
+        width: auto;
+        background-color: white;
+        margin: 0;
+    }
     .userprofile{
         margin: 15px 0 0 20px;
         color: white;
@@ -184,10 +219,10 @@ export default {
     }
     .newputIcon{
         border-radius: 50%;
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
     }
-    .username, .usermail{
+    .username, .usermail, .userprofileName{
         display: flex;
         align-items: center;
     }
@@ -202,7 +237,16 @@ export default {
     .emailText{
         margin-left: 20px;
         word-wrap: break-word;
-        width: 180px;
+        width: 155px;
+    }
+    .profileText{
+        margin-left: 20px;
+        word-wrap: break-word;
+        width: 170px;
+        text-transform: capitalize;
+    }
+    .userprofileName{
+        margin-top: 12px;
     }
 
 
@@ -222,13 +266,16 @@ export default {
         color: rgb(0, 255, 170);
     }
     .md-cloud{
-        color: rgb(0, 195, 255);
+        color: rgb(0, 183, 255);
     }
     .md-logout{
         color: rgb(255, 255, 255);
     }
     .md-mail{
         color:rgb(226, 167, 253);
+    }
+    .md-personal, .md-work{
+        color: rgb(157, 255, 225);
     }
 
     @media (max-width: 850px){
@@ -248,9 +295,6 @@ export default {
             left: 0;
             z-index: 3 !important;
         }
-        #sidenav .logout{
-            margin-bottom: 100px;
-        }
         .sidenavActive .overlay{
             visibility: visible;
             position: fixed !important;
@@ -262,6 +306,9 @@ export default {
         }
         #sidenav .logo{
             display: none;
+        }
+        #sidenav .logout{
+            margin-bottom: 60px;
         }
         #mainNav{
             height: 58px;
@@ -290,7 +337,7 @@ export default {
     }
 
     @media (max-width: 768px){
-        #sidenav ul .routeLink, #sidenav .logout{
+        #sidenav ul .routeLink, #sidenav .logout, #sidenav .settings{
             padding: 17px 0 17px 20px;
             font-size: 17px;
         }
