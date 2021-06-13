@@ -23,28 +23,132 @@
                 <router-view />
             </div>
         </div>
+        <!-- Button trigger modal
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SessionTimeoutModal">
+            Launch demo modal
+        </button>  -->
+        <!--Session Timeout Modal-->
+        <div class="modal fade" id="SessionTimeoutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Session Timeout Warning</h5>
+                        <button type="button" @click="clearSetInterval" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Your session is about to expire. Please click to continue session. </p>
+                        <h6>{{ mins }} : {{ secs }}</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" @click="clearSetInterval" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" @click="extendSession" class="btn btn-primary">Extend Session</button>
+                    </div>
+                </div>
+            </div>
+        </div>
   </div>
 </template>
 
 <script>
-import { ref,  watch } from 'vue';
+import { computed, ref,  watch } from 'vue';
+import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import Navbar from './Navbar.vue';
+//open and close bootstrap modal
+import { Modal } from 'bootstrap';
+
 export default {
  components: {
    'app-Navbar': Navbar
  },
  setup(){
+    const store = useStore();
     const route = useRoute();
     var bool = ref('');
     
     watch(route, (newval) => {
         bool.value = newval.name;
     });
-     
-     return{
-         bool
-     }
+
+    var showModal = computed(() => store.getters.getshowSessionModal);
+
+    watch(showModal, () => {
+        if(showModal.value){
+            var myModal = new Modal(document.getElementById('SessionTimeoutModal'), {
+                keyboard: false
+            });
+
+            myModal.show();
+
+            sessionTimer();
+        }
+        else{
+            var myModalEl = document.getElementById('SessionTimeoutModal');
+            var modal = Modal.getInstance(myModalEl) // Returns a Bootstrap modal instance
+            modal.hide();
+        }
+    });
+    
+    var sMinutes = ref(); 
+    var sSeconds = ref();
+    var st;
+
+    function sessionTimer(){
+        sMinutes.value = 10;
+        sSeconds.value = 0;
+
+        st = setInterval(() => {
+            if(sMinutes.value === 0 && sSeconds.value === 0){
+                clearInterval(st);
+            }
+            else if(sSeconds.value === 0){
+                sSeconds.value = 59;
+                sMinutes.value--;
+            }
+            else{
+                sSeconds.value--;
+            }
+        }, 1000);
+    }
+
+    var mins = computed(() => {
+        if(sMinutes.value < 10){
+            return '0' + sMinutes.value;
+        }
+        else{
+            return sMinutes.value;
+        }
+    });
+
+    var secs = computed(() => {
+        if(sSeconds.value < 10){
+            return '0' + sSeconds.value;
+        }
+        else{
+            return sSeconds.value;
+        }
+    });
+
+    function extendSession(){
+        //close session modal
+        store.commit('setSMToFalse');
+
+        clearInterval(st);
+
+        store.dispatch('extendSession');
+    }
+
+    function clearSetInterval(){
+        clearInterval(st);
+    }
+
+    return{
+        bool,
+        mins,
+        secs,
+        extendSession,
+        clearSetInterval
+    }
  }
 }
 </script>
@@ -73,6 +177,12 @@ export default {
 }
 #smallNav{
     display: none;
+}
+#SessionTimeoutModal .modal-body{
+    text-align: center;
+}
+#SessionTimeoutModal .modal-title{
+    margin-left: 120px;
 }
 
 @media (max-width: 850px){

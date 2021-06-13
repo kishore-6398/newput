@@ -8,6 +8,8 @@ const state = () => {
         signupEndpoint: "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=",
         loginEndpoint: "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=",
         passwordReset: "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=",
+        deleteAccount: "https://identitytoolkit.googleapis.com/v1/accounts:delete?key=",
+        refreshToken: "https://securetoken.googleapis.com/v1/token?key=",
         weatherApiUrl: "https://api.weatherapi.com/v1/current.json?key=",
         weatherAPIKey: "9edb0764268f49a1b8264554202210"
     };
@@ -18,6 +20,11 @@ const getters = {
         return state.position;
     },
     getfbdburl(state){
+        var localId = store.getters.getlocalId;
+        var profile = store.getters.getProfile;
+        return state.fbdbUrl + localId + '/' + profile;
+    },
+    getfbdburlsettings(state){
         var localId = store.getters.getlocalId;
         return state.fbdbUrl + localId;
     },
@@ -32,6 +39,12 @@ const getters = {
     },
     getpasswordReset(state){
         return state.passwordReset
+    },
+    getdeleteAccount(state){
+        return state.deleteAccount
+    },
+    getrefreshTokenEndPoint(state){
+        return state.refreshToken
     },
     getweatherApiUrl(state){
         return state.weatherApiUrl;
