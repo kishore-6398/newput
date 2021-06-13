@@ -91,9 +91,12 @@ import { useStore } from 'vuex';
 export default {
   setup() {
     const store = useStore();
-    //console.log(username)
+  
     var name = computed(() => store.getters.getUsername);
     var email = computed(() => store.getters.getuserEmail);
+
+    store.commit("stopSpin");
+
     return{
       name,
       email

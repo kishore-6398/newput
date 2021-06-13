@@ -31,7 +31,11 @@
                 </span>
             </div>
             <div>
-                <button @click="signupUser" class="btn signupBtn">Sign Up</button>
+                <button v-if="!spin" @click="signupUser" class="btn signupBtn">Sign Up</button>
+                <button v-else class="btn signupBtn" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Loading...
+                </button>
             </div>
             <div class="signupFooter">
                 <span>Already have an account? </span>
@@ -77,9 +81,12 @@ export default {
         function signupUser(){
             this.v$.$validate();    
             if(!this.v$.$error){
+                store.commit("startSpin");
                 store.dispatch('signupUserInFb', signupDetails.data);
             }
         }
+
+        var spin = computed(() => store.getters.getspin);
 
         var toggle = ref(true);
 
@@ -99,7 +106,8 @@ export default {
             signupUser,
             v$,
             togglepassword,
-            toggle
+            toggle,
+            spin
         };
     }
 }

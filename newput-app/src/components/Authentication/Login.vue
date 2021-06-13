@@ -27,7 +27,11 @@
                 <router-link to="/forgotpassword" class="fplink">Forgot Password?</router-link>
             </div>
             <div>
-                <button @click="loginUser" class="btn loginBtn">Login</button>
+                <button v-if="!spin" @click="loginUser" class="btn loginBtn">Login</button>
+                <button v-else class="btn loginBtn" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Loading...
+                </button>
             </div>
             <div class="loginFooter">
                 <span>Doesn't have an account yet? </span>
@@ -68,9 +72,12 @@ export default {
         function loginUser(){
             this.v$.$validate();    
             if(!this.v$.$error){
+                store.commit("startSpin");
                 store.dispatch('loginUserInFb', loginDetails.data);
             }
         }
+
+        var spin = computed(() => store.getters.getspin);
 
         var toggle = ref(true);
 
@@ -90,7 +97,8 @@ export default {
             loginUser,
             v$,
             togglepassword,
-            toggle
+            toggle,
+            spin
         };
     }
 }
