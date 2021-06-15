@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { onMounted, computed, reactive } from 'vue';
+import { onMounted, computed, watch, reactive } from 'vue';
 import { useStore } from 'vuex';
 import IUrl from './IUrl.vue';
 
@@ -52,6 +52,12 @@ export default {
 
         onMounted(() => {
             store.dispatch('getUrlFromDb');
+        });
+
+        var profile = computed(() => store.getters.getProfile);
+
+        watch(profile, () => {
+            store.dispatch("getUrlFromDb");
         });
 
         var urlData = computed(() => {

@@ -5,7 +5,7 @@
             <h3>Todo List</h3>
             <div class="date">
                 <span class="material-icons md-today">today</span>
-                <span>{{ dateToday }}</span>  
+                <span class="dateToday">{{ dateToday }}</span>  
             </div>
         </div>
          <!--todo Form and mobile form-->   
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { computed, onMounted, reactive } from 'vue';
+import { computed, onMounted, reactive, watch } from 'vue';
 import { useStore } from 'vuex';
 import TodoForm from './TodoForm.vue';
 import ITodo from './ITodo.vue';
@@ -70,6 +70,12 @@ export default {
         });
 
         onMounted(() => {
+            store.dispatch("getTodosFromDb");
+        });
+
+        var profile = computed(() => store.getters.getProfile);
+
+        watch(profile, () => {
             store.dispatch("getTodosFromDb");
         });
 
@@ -118,6 +124,9 @@ export default {
     margin-left: auto;
     display: flex;
 }
+.dateToday{
+    font-size: 17px;
+}
 .todoimage{
     border-radius: 50%;
     margin-right: 5px;
@@ -137,7 +146,7 @@ h3{
     padding: 0 20px;
     position: sticky;
     top: 0px;
-    background-color: white;
+    background-color:#c9c9fc;
     box-shadow: 0 5px 25px rgba(0, 0, 0 , 0.12);
 }
 
@@ -168,7 +177,7 @@ h3{
     .searchAndDd{
         margin: 15px 0;
         padding: 0 20px;
-        background-color: white;
+        background-color: #d7d7ff;
         box-shadow: 0 5px 25px rgba(0, 0, 0 , 0.12);
         position: unset;
         /* transition: 1.5s;toggle position sticky in card
@@ -178,6 +187,9 @@ h3{
         z-index: -1;/*toggle position sticky in card
         transition: 0s;/*toggle position sticky in card
     } */
+    .dateToday{
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 350px){

@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { onMounted, computed, reactive } from 'vue';
+import { onMounted, computed, watch, reactive } from 'vue';
 import { useStore } from 'vuex';
 import INote from "./INote.vue";
 
@@ -51,6 +51,12 @@ export default {
 
     onMounted(() => {
       store.dispatch('getNotesFromDb');
+    });
+
+    var profile = computed(() => store.getters.getProfile);
+
+    watch(profile, () => {
+        store.dispatch("getNotesFromDb");
     });
 
     var notesDataArray = computed(() => {

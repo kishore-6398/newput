@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { onMounted, computed, ref } from 'vue';
+import { onMounted, computed, watch, ref } from 'vue';
 import { useStore } from 'vuex';
 import IPVault from './IPVault.vue';
 
@@ -49,6 +49,12 @@ export default {
 
         onMounted(() => {
             store.dispatch('getVaultDataFromDb');
+        });
+
+        var profile = computed(() => store.getters.getProfile);
+
+        watch(profile, () => {
+            store.dispatch("getVaultDataFromDb");
         });
 
         var vaultData = computed(() => {
@@ -79,7 +85,7 @@ export default {
         display: flex;
         position: sticky;
         top:0;
-        background: rgb(255, 255, 255);
+        background: white;
     }
     .header-mobile{
         display: none;
