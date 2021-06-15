@@ -32,16 +32,16 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Session Timeout Warning</h5>
+                        <h4 class="modal-title" id="staticBackdropLabel">Session Timeout Warning</h4>
                         <button type="button" @click="clearSetInterval" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <p>Your session is about to expire. Please click to continue session. </p>
-                        <h6>{{ mins }} : {{ secs }}</h6>
+                        <h5>{{ mins }} : {{ secs }}</h5>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" @click="clearSetInterval" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" @click="extendSession" class="btn btn-primary">Extend Session</button>
+                        <button type="button" @click="clearSetInterval" class="btn backBtn" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" @click="extendSession" class="btn saveBtn">Extend Session</button>
                     </div>
                 </div>
             </div>
@@ -181,8 +181,8 @@ export default {
 #SessionTimeoutModal .modal-body{
     text-align: center;
 }
-#SessionTimeoutModal .modal-title{
-    margin-left: 120px;
+#SessionTimeoutModal p{
+    font-size: 18px;
 }
 
 @media (max-width: 850px){

@@ -4,9 +4,9 @@
       <div id="editor1"></div>
         <div class="editsaveBar">
             <div class="editbtns">
-                <router-link to="/notes" class="btn btn-secondary">Back</router-link>
-                <button @click="resetEditor" class="btn btn-danger reset">Reset</button>
-                <button @click="cloneData" data-bs-toggle="modal" data-bs-target="#notesEditModal" class="btn btn-primary update">Update Notes</button>
+                <router-link to="/notes" class="btn backBtn">Back</router-link>
+                <button @click="resetEditor" class="btn btnRed reset">Reset</button>
+                <button @click="cloneData" data-bs-toggle="modal" data-bs-target="#notesEditModal" class="btn saveBtn update">Update Notes</button>
             </div>
         </div>
     </div>
@@ -36,8 +36,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button @click="updateNotes" type="button" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn backBtn" data-bs-dismiss="modal">Cancel</button>
+                    <button @click="updateNotes" type="button" class="btn saveBtn">Update</button>
                 </div>
             </div>
         </div>

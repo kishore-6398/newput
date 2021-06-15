@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn backBtn" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn saveBtn" @click="updateUrl">Save changes</button>
                     </div>
                 </div>
@@ -162,11 +162,12 @@ export default {
     .urlcard{
         background-color: white;
         border-radius: 15px;
-        box-shadow: 0 2px 25px rgba(0, 0, 0, 0.13);
+        box-shadow: 0 3px 10px rgba(0 , 0 , 0, 0.2);
         margin: 20px 0 0 0;
     }
     #errorText{
         color: red;
+        margin-top: 4px; 
     }
     .hrurl{
         margin: 0 0;

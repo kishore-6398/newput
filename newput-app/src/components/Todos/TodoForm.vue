@@ -46,7 +46,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn backBtn" data-bs-dismiss="modal">Cancel</button>
                             <button type="button" class="btn saveBtn" @click="submitTodo" :disabled="!todoData.todosModel.todoMsg">Add Todo</button>
                         </div>
                     </div>

@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn backBtn" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn saveBtn" @click="updateVaultDetails">Save changes</button>
                     </div>
                 </div>
@@ -199,13 +199,14 @@ export default {
 
 <style>
     .vault-card{
-        box-shadow: 0 3px 20px rgba(0 , 0 , 0, 0.1);
+        box-shadow: 0 3px 10px rgba(0 , 0 , 0, 0.2);
         border-radius: 15px;
         margin: 20px 0 0 0;
         min-height: 160px;
     }
     #errorText{
         color: red;
+        margin-top: 4px; 
     }
     .vault-title{
         display: flex;
@@ -239,6 +240,7 @@ export default {
         margin-left: 7px;
         overflow: hidden;
         text-overflow:ellipsis;
+        font-size: 16px;
     }
 
     /*Icon Css*/

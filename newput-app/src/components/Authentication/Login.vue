@@ -7,7 +7,7 @@
             </div>
             <div>
                 <label for="loginEmail" class="form-label">Email</label>
-                <input v-model="v$.email.$model" type="email" class="form-control" id="loginEmail">
+                <input v-model="v$.email.$model" type="email" class="form-control" id="loginEmail" placeholder="example@gmail.com">
                 <span v-if="v$.email.$error">
                     <div id="errorText">{{ v$.email.$errors[0].$message }}</div>
                 </span>
@@ -27,14 +27,14 @@
                 <router-link to="/forgotpassword" class="fplink">Forgot Password?</router-link>
             </div>
             <div>
-                <button v-if="!spin" @click="loginUser" class="btn loginBtn">Login</button>
+                <button v-if="!spin" @click="loginUser" class="btn loginBtn loginButton"><span class="material-icons md-login">login</span> Login</button>
                 <button v-else class="btn loginBtn" type="button" disabled>
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Loading...
                 </button>
             </div>
             <div class="loginFooter">
-                <span>Doesn't have an account yet? </span>
+                <span>Don't have an account yet? </span>
                 <router-link to="/signup" class="link">Sign Up</router-link>
             </div>
         </div>
@@ -122,6 +122,10 @@ export default {
     .LoginCard>div{
         margin-bottom: 20px;
     }
+    label{
+        font-weight: bold;
+        font-size: 17px;
+    }
     .loginBtn{
         width: 100%;
         border-radius: 20px;
@@ -131,6 +135,13 @@ export default {
         outline: none;
         border: none;
         font-weight: bold;
+    }
+    .loginButton{
+        display: flex;
+        justify-content: center;
+    }
+    .loginButton .md-login{
+        padding-right: 10px;
     }
     .loginBtn:hover{
         color: white;

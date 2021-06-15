@@ -2,7 +2,7 @@
     <div id="settingsWrap">
         <div class="settings">
             <div class="personalDetails">
-                <h4 class="settingsHead">Personal Details:</h4>
+                <div class="settingsHead">Personal Details:</div>
                 <div class="detailsWrap">
                     <div class="proName">Name: {{ name }}</div>
                     <div class="proEmail">Email: {{ email }}</div>
@@ -10,7 +10,7 @@
             </div>
 
             <div class="profileSettings">
-                <h4 class="settingsHead">Profile Settings:</h4>
+                <div class="settingsHead">Profile Settings:</div>
                 <div class="form-check form-switch">
                     <label class="form-check-label" for="flexSwitchCheckChecked">Personal profile</label>
                     <input class="form-check-input" :checked="prof" @change="changeProfile" type="checkbox" id="flexSwitchCheckChecked">
@@ -20,10 +20,10 @@
             </div>
 
             <div class="deleteAccount">
-                <h4 class="settingsHead">Delete Account:</h4>
+                <div class="settingsHead">Delete Account:</div>
                 <p style="margin-top: 15px;">This will delete all the account related details, stored data etc.</p>
                 <p>Once deleted you will not be able to recover data again.</p>
-                <button class="btn btn-danger" @click="deleteAccount">Delete Account</button>
+                <button class="btn btn-delete btnRed" @click="deleteAccount"><span class="material-icons md-deleteacc">delete</span>Delete Account</button>
             </div>
         </div>
     </div>
@@ -93,6 +93,7 @@ export default {
         display: flex;
         flex-direction: column;
         margin: 50px 40px;
+        font-size: 19px;
     }
     .settings{
         margin: auto;
@@ -103,8 +104,6 @@ export default {
     }
     .proEmail, .proName{
         font-weight: bold;
-        font-style: italic;
-        font-size: 17px;
     }
     .proEmail{
         margin-left: 100px;
@@ -118,13 +117,23 @@ export default {
     .form-check-label{
         padding-left: 8px;
         font-weight:bold;
-        font-size: 17px;
+        font-size: 19px;
     }
     .proText{
         margin-top: 10px;
+        font-size: 18px;
+    }
+    .deleteAccount p{
+        font-size: 18px;
     }
     .settingsHead{
         color: rgb(183, 0, 255);
+        font-size: 25px;
+        font-weight: bold;
+        font-style: italic;
+    }
+    .btn-delete{
+        display: flex;
     }
 
     @media (max-width: 1024px){
@@ -151,9 +160,6 @@ export default {
 
      @media (max-width: 400px){
         .proEmail, .proName{
-            font-weight: bold;
-            font-style: italic;
-            font-size: 17px;
             word-wrap: break-word;
             width: calc(100vw - 80px);
         }

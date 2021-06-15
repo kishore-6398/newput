@@ -34,7 +34,7 @@
                 </span>
             </div>
             <div class="savebtngroup">
-                <router-link to="/pvault" class="btn btn-secondary backbtn">Go Back</router-link>
+                <router-link to="/pvault" class="btn backBtn">Go Back</router-link>
                 <button class="btn saveBtn" @click="submitVault" >Save To Vault</button>
             </div>
         </div>
@@ -94,12 +94,13 @@ export default {
     }
     #errorText{
         color: red;
+        margin-top: 4px; 
     }
     .formCard{
         margin: auto;
         border-radius: 20px;
         padding: 20px;
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
         width: 50%;
     }
     .formCardTitle{
@@ -122,18 +123,24 @@ export default {
         margin-left: 10px;
     }
 
-    @media (max-width: 768px){
+    @media (max-width: 850px){
         #pVaultForm{
-            height: auto;
+            height: calc(100vh - 58px);
         }
         .formCard{
+            width: 75%;
+            margin: auto;
+        }
+    }
+
+    @media (max-width: 768px){
+        .formCard{
             width: 90%;
-            margin: 10% 5%;
         }
         .savebtngroup{
             display: flex;
         }
-        .savebtngroup .btn, .backbtn{
+        .savebtngroup .btn{
             width: 50%;
         }
     }

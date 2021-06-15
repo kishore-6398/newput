@@ -27,7 +27,7 @@
                 </span>
             </div>
             <div class="savebtngroup">
-                <router-link to="/url" class="btn btn-secondary backbtn">Go Back</router-link>
+                <router-link to="/url" class="btn backBtn">Go Back</router-link>
                 <button class="btn saveBtn" @click="submitURL">Add URL</button>
             </div>
         </div>
@@ -84,11 +84,12 @@ export default {
     }
     #errorText{
         color: red;
+        margin-top: 4px; 
     }
     .urlformcard{
         background-color: white;
         padding: 20px;
-        box-shadow: 0 2px 25px rgba(0, 0, 0, 0.13);
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
         width: 50%;
         margin: auto;
         border-radius: 20px;
@@ -113,18 +114,24 @@ export default {
         margin-left: 10px;
     }
 
-    @media (max-width: 768px){
+    @media (max-width: 850px){
         #UrlFormView{
-            height: auto;
+            height: calc(100vh - 58px);
         }
         .urlformcard{
+            width: 75%;
+            margin: auto;
+        }
+    }
+
+    @media (max-width: 768px){
+        .urlformcard{
             width: 90%;
-            margin: 15% 5%;
         }
         .savebtngroup{
             display: flex;
         }
-        .savebtngroup .btn, .backbtn{
+        .savebtngroup .btn{
             width: 50%;
         }
     }

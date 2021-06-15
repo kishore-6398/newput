@@ -196,13 +196,13 @@ export default {
         visibility: hidden;
     }
     .hrnav{
-        height: 0.5px;
+        height: 1px;
         width: auto;
         background-color: white;
         margin: 20px 0 0 0;
     }
     .hrnav1{
-        height: 0.5px;
+        height: 1px;
         width: auto;
         background-color: white;
         margin: 0;

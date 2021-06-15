@@ -14,7 +14,7 @@
             </div>
             <div>
                 <label for="signupEmail" class="form-label">Email</label>
-                <input type="email" v-model="v$.email.$model" class="form-control" id="signupEmail">
+                <input type="email" v-model="v$.email.$model" class="form-control" id="signupEmail" placeholder="example@gmail.com">
                 <span v-if="v$.email.$error">
                     <div id="errorText">{{ v$.email.$errors[0].$message }}</div>
                 </span>
@@ -31,7 +31,7 @@
                 </span>
             </div>
             <div>
-                <button v-if="!spin" @click="signupUser" class="btn signupBtn">Sign Up</button>
+                <button v-if="!spin" @click="signupUser" class="btn signupBtn signupButton"><span class="material-icons md-signup">login</span>Sign Up</button>
                 <button v-else class="btn signupBtn" type="button" disabled>
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Loading...
@@ -152,6 +152,13 @@ export default {
         outline: none;
         border: none;
         font-weight: bold;
+    }
+    .signupButton{
+        display: flex;
+        justify-content: center;
+    }
+    .signupButton .md-signup{
+        padding-right: 10px;
     }
     .signupBtn:hover{
         color: white;

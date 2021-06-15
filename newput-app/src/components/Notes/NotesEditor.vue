@@ -4,9 +4,9 @@
             <div id="editor"></div>
             <div class="saveBar">
                 <div class="btns">
-                    <router-link to="/notes" class="btn btn-secondary back">Back</router-link>
-                    <button @click="resetEditor" class="btn btn-danger reset">Reset</button>
-                    <button data-bs-toggle="modal" data-bs-target="#notesModal" class="btn btn-primary save">Save Notes</button>
+                    <router-link to="/notes" class="btn backBtn">Back</router-link>
+                    <button @click="resetEditor" class="btn btnRed reset">Reset</button>
+                    <button data-bs-toggle="modal" data-bs-target="#notesModal" class="btn saveBtn save">Save Notes</button>
                 </div>
             </div>
         </div>
@@ -36,8 +36,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button @click="saveNotes" type="button" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn backBtn" data-bs-dismiss="modal">Cancel</button>
+                        <button @click="saveNotes" type="button" class="btn saveBtn">Save</button>
                     </div>
                 </div>
             </div>
@@ -182,6 +182,7 @@ export default {
     }
     #errorText{
         color: red;
+        margin-top: 4px; 
     }
     .saveBar{
         width: 100%;
@@ -197,6 +198,22 @@ export default {
     }
     .save{
         margin-left: 15px;
+    }
+    .btnRed{
+        background-color: rgb(255, 49, 49);
+        color: white;
+        outline: none;
+        border: none;
+        font-weight: bold;
+    }
+    .btnRed:hover{
+        color: white;
+        background-color: rgb(255, 49, 49);
+    }
+    .btnRed:focus{
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 3px rgb(255, 187, 187);
     }
 
     @media (min-width: 358px){

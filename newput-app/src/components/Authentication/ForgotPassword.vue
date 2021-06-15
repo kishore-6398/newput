@@ -8,7 +8,7 @@
 
             <div>
                 <label for="fpEmail" class="form-label">Enter your email</label>
-                <input v-model="v$.email.$model" type="email" class="form-control" id="fpEmail">
+                <input v-model="v$.email.$model" type="email" class="form-control" id="fpEmail" placeholder="example@gmail.com">
                 <span v-if="v$.email.$error">
                     <div id="errorText">{{ v$.email.$errors[0].$message }}</div>
                 </span>
