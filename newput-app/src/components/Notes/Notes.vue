@@ -56,7 +56,9 @@ export default {
     var profile = computed(() => store.getters.getProfile);
 
     watch(profile, () => {
+      if(profile.value !== ''){
         store.dispatch("getNotesFromDb");
+      }
     });
 
     var notesDataArray = computed(() => {
@@ -116,7 +118,8 @@ export default {
     margin: 5px 10px 70px 10px;
   }
   .filterContainer{
-    background-color: white;
+    background-color: #f876de;
+    background-image: linear-gradient(315deg, #f876de 0%, #b9d1eb 74%);
     box-shadow: 0 2px 25px rgba(0, 0, 0, 0.13);
     padding: 12px 18px;
     display: flex;
@@ -165,6 +168,10 @@ export default {
       }
       .notestitleheading{
         display: block;
+      }
+      .filterContainer{
+        background-color:white;
+        background-image: unset;
       }
   }
 </style>

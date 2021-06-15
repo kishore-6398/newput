@@ -57,7 +57,9 @@ export default {
         var profile = computed(() => store.getters.getProfile);
 
         watch(profile, () => {
-            store.dispatch("getUrlFromDb");
+            if(profile.value !== ''){
+                store.dispatch("getUrlFromDb");
+            }
         });
 
         var urlData = computed(() => {
@@ -114,7 +116,8 @@ export default {
         box-shadow: 0 0 0 3px rgb(255, 218, 255);
     }
     .searchandcatcard{
-        background-color: white;
+        background-color: #f876de;
+        background-image: linear-gradient(315deg, #f876de 0%, #b9d1eb 74%);
         box-shadow: 0 2px 25px rgba(0, 0, 0, 0.13);
         padding: 12px 25px;
         display: flex;
@@ -170,6 +173,10 @@ export default {
         }
         .urltitleheading{
             display: block;
+        }
+        .searchandcatcard{
+            background-color: white;
+            background-image: unset
         }
     }
 </style>

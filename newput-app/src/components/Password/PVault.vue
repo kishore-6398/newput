@@ -54,7 +54,9 @@ export default {
         var profile = computed(() => store.getters.getProfile);
 
         watch(profile, () => {
-            store.dispatch("getVaultDataFromDb");
+            if(profile.value !== ''){
+                store.dispatch("getVaultDataFromDb");
+            }
         });
 
         var vaultData = computed(() => {
@@ -85,7 +87,8 @@ export default {
         display: flex;
         position: sticky;
         top:0;
-        background: white;
+        background-color: #d5fefd;
+background-image: linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);
     }
     .header-mobile{
         display: none;

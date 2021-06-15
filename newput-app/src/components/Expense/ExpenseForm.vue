@@ -156,7 +156,8 @@ export default {
         align-items: center;
         position: sticky;
         top:0;
-        background: rgb(255, 255, 255);
+        background-color: #d5fefd;
+        background-image: linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);
     }
     .expenseIcon{
         border-radius: 50%;
@@ -252,6 +253,8 @@ export default {
     @media (max-width: 850px){
         .titleCard{
             position:static;
+            background-color: white;
+            background-image: unset;
         }
         .totalbalance{
             width: 90%;

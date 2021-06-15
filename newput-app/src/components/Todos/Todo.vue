@@ -76,7 +76,9 @@ export default {
         var profile = computed(() => store.getters.getProfile);
 
         watch(profile, () => {
-            store.dispatch("getTodosFromDb");
+            if(profile.value !== ''){
+                store.dispatch("getTodosFromDb");
+            } 
         });
 
         var todosArray = computed(() => {
@@ -146,7 +148,8 @@ h3{
     padding: 0 20px;
     position: sticky;
     top: 0px;
-    background-color:#c9c9fc;
+    background-color: #f876de;
+    background-image: linear-gradient(315deg, #f876de 0%, #b9d1eb 74%);
     box-shadow: 0 5px 25px rgba(0, 0, 0 , 0.12);
 }
 
@@ -177,7 +180,8 @@ h3{
     .searchAndDd{
         margin: 15px 0;
         padding: 0 20px;
-        background-color: #d7d7ff;
+        background-color: white;
+        background-image:unset;
         box-shadow: 0 5px 25px rgba(0, 0, 0 , 0.12);
         position: unset;
         /* transition: 1.5s;toggle position sticky in card

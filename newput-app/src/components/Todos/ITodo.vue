@@ -161,7 +161,7 @@ export default {
 
 <style>
     .todo-bar{
-        box-shadow: 0 0 2px 1px rgba(0 , 0 , 0, 0.3);
+        box-shadow: 0 0 3px 0.4px rgba(0 , 0 , 0, 0.25);
         border-radius: 15px;
         margin: 10px 0 0 0;
         width: 100%;
@@ -252,7 +252,7 @@ export default {
         -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
     }
     .todo-complete{
-        background-color: rgb(197, 255, 202);
+        background-color: rgb(185, 255, 191);
         transition: 0.5s;
     }
     .todo-complete:hover{
