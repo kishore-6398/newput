@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn backBtn" data-bs-dismiss="modal">Cancel</button>
                         <button type="button" class="btn saveBtn" @click="updateTodo" :disabled="!tododata.todoObj.todoMsg">Save Changes</button>
                     </div>
                 </div>
@@ -61,7 +61,8 @@ export default {
     setup(props){
         var store = useStore();
         var tododata = reactive({
-            todoObj: Object.assign({}, props.todo)
+            todoObj: Object.assign({}, props.todo),
+            todoUpdateObj: {}
         });
         
         function cloneData(){
@@ -69,7 +70,8 @@ export default {
             tododata.todoObj.todoMsg = bridge.todoMsg;
             tododata.todoObj.completed = bridge.completed;
             tododata.todoObj.id = bridge.id;
-            
+            tododata.todoObj.dueDate = bridge.dueDate;
+
             //time conversion
             if(tododata.todoObj.dueDate !== ''){
                 var dueDateOld = bridge.dueDate;
@@ -100,8 +102,32 @@ export default {
         }
 
         function updateTickIcon(){
-            tododata.todoObj.completed = !tododata.todoObj.completed;
-            store.dispatch('updateTodoInDb', tododata.todoObj);
+            var bridge = Object.assign({}, props.todo);
+            tododata.todoUpdateObj.todoMsg = bridge.todoMsg;
+            tododata.todoUpdateObj.completed = !bridge.completed;
+            tododata.todoUpdateObj.id = bridge.id;
+            tododata.todoUpdateObj.dueDate = bridge.dueDate;
+
+            //time conversion
+            if(tododata.todoUpdateObj.dueDate !== ''){
+                var dueDateOld = bridge.dueDate;
+                var date = dueDateOld.slice(0, 2);
+                var m = dueDateOld.slice(3, 6);
+                var year = dueDateOld.slice(7);
+                const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                var month = months.indexOf(m);
+                var mInt = month + 1;
+                if(mInt < 10){
+                    mInt = '0' + mInt;
+                }
+                
+                tododata.todoUpdateObj.dueDate = year + '-' + mInt + '-' + date;
+            }
+            else{
+                tododata.todoUpdateObj.dueDate = bridge.dueDate;
+            }
+
+            store.dispatch('updateTodoInDb', tododata.todoUpdateObj);
         }
 
         function deleteTodo(){
@@ -122,16 +148,6 @@ export default {
             });
         }
 
-        // var filteredDate = computed(() => {
-        //     var dueDateOld = props.todo.dueDate;
-        //     var date = dueDateOld.slice(8);
-        //     var month = parseInt(dueDateOld.slice(5, 7));
-        //     var year = dueDateOld.slice(0, 4);
-        //     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-        //     return date + ' ' + months[month - 1] + ' ' + year;
-        // });
-
         return{
             tododata,
             cloneData,
@@ -145,9 +161,9 @@ export default {
 
 <style>
     .todo-bar{
-        box-shadow: 0 0 2px rgba(0, 0, 0 , 0.4);
+        box-shadow: 0 0 2px 1px rgba(0 , 0 , 0, 0.3);
         border-radius: 15px;
-        margin: 14px 0 0 0;
+        margin: 10px 0 0 0;
         width: 100%;
         cursor: pointer;
         display: inline-flex;
@@ -195,6 +211,24 @@ export default {
         border: none;
         box-shadow: 0 0 0 3px rgb(205, 255, 238);
     }
+    .backBtn{
+        background-color: #000000;
+        background-image: linear-gradient(315deg, #000000 0%, #7f8c8d 74%);
+        color: white;
+        outline: none;
+        border: none;
+        font-weight: bold;
+    }
+    .backBtn:hover{
+        color: white;
+        background-color: #000000;
+        background-image: linear-gradient(315deg, #3d3d3d 0%, #9dabac 74%);
+    }
+    .backBtn:focus{
+        outline: none;
+        border: none;
+        box-shadow: 0 0 0 3px rgb(214, 214, 214);
+    }
     .md-tick-grey{
         color: rgb(170, 170, 170);
         font-size: 30px;
@@ -227,5 +261,8 @@ export default {
     }
     .todo-complete .todo-complete-text{
         text-decoration: line-through;
+    }
+    .todo-complete-text{
+        font-size: 17px;
     }
 </style>
