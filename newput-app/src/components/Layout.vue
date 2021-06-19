@@ -94,8 +94,8 @@ export default {
     var st;
 
     function sessionTimer(){
-        sMinutes.value = 10;
-        sSeconds.value = 0;
+        sMinutes.value = 9;
+        sSeconds.value = 59;
 
         st = setInterval(() => {
             if(sMinutes.value === 0 && sSeconds.value === 0){
